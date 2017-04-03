@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#FFFFFF</color>
+    <color name="primary">#ffffff</color>
     <color name="secondary">#B3FFFFFF</color>
     <color name="hint">#61000000</color>
-    <color name="primary_dark">#92CBC5</color>
+    <color name="primary_dark">#92cbc5</color>
 
-    <color name="accent">#92CBC5</color>
+    <color name="accent">#92cbc5</color>
+    <color name="primary_material_dark">#ffffff</color>
+    <color name="backgroundmaterial">#313131</color>
 </resources>

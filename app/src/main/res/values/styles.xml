@@ -4,6 +4,12 @@
 
     <style name="AppTheme" parent="Theme.AppCompat">
 
+        <item name="colorPrimary">@android:color/background_dark</item>
+        <item name="colorPrimaryDark">@android:color/background_light</item>
+
+        <item name="android:colorBackground">@color/backgroundmaterial</item>
+        <item name="android:colorForeground">@color/backgroundmaterial</item>
     </style>
+
 
 </resources>

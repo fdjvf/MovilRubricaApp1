@@ -2,16 +2,12 @@
 <resources>
 
     <style name="AppTheme" parent="android:Theme.Material">
-        <!-- Main theme colors -->
-        <!--   your app branding color for the app bar -->
 
-        <item name="android:colorPrimary">@color/primary</item>
-        <item name="android:colorSecondary">@color/secondary</item>
-        <!--   darker variant for the status bar and contextual app bars -->
-        <item name="android:textColorHint">@color/hint</item>
-        <item name="android:colorPrimaryDark">@color/primary_dark</item>
-        <!--   theme UI controls like checkboxes and text fields -->
-        <item name="android:colorAccent">@color/accent</item>
-
+        <item name="colorPrimary">@android:color/background_dark</item>
+        <item name="colorPrimaryDark">@android:color/background_light</item>
+        <item name="android:navigationBarColor">@android:color/secondary_text_light</item>
+        <item name="android:colorBackground">@color/backgroundmaterial</item>
+        <item name="android:colorForeground">@color/backgroundmaterial</item>
     </style>
+
 </resources>
