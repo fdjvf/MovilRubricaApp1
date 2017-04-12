@@ -17,11 +17,18 @@ public class Asignatura extends SugarRecord {
 
     public Asignatura() {
     }
-
     public Asignatura(String name, String descripcion, ArrayList<Estudiante> estudiantes, ArrayList<Evaluacion> evaluaciones) {
         this.name = name;
         this.descripcion = descripcion;
         this.estudiantes = estudiantes;
         this.evaluaciones = evaluaciones;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

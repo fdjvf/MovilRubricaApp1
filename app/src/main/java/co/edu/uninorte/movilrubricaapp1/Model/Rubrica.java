@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class Rubrica extends SugarRecord {
     String name;
+    String descripcion;
     ArrayList<Categoria> categoriaArray;
     int niveles;
 

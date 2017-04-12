@@ -17,7 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewCourse"></activity>
+        <activity android:name=".View.NewCourse"></activity>
 
         <meta-data
             android:name="DATABASE"
@@ -30,7 +30,7 @@
             android:value="true" />
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
-            android:value="com.example" />
+            android:value="co.edu.uninorte.movilrubricaapp1" />
     </application>
 
 </manifest>

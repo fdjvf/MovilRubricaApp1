@@ -1,7 +1,9 @@
-package co.edu.uninorte.movilrubricaapp1;
+package co.edu.uninorte.movilrubricaapp1.View;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import co.edu.uninorte.movilrubricaapp1.R;
 
 public class NewCourse extends AppCompatActivity {
 
