@@ -1,4 +1,4 @@
-package co.edu.uninorte.movilrubricaapp1.View;
+package co.edu.uninorte.movilrubricaapp1;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,6 @@ public class NewCourse extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_course);
+        setContentView(R.layout.curso_activity_nuevo_curso);
     }
 }
