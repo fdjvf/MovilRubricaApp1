@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="studenthint"
+            type="co.edu.uninorte.movilrubricaapp1.Adapters.StudentHint">
+
+        </variable>
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+
+        android:weightSum="1">
 
         <EditText
             android:id="@+id/StudentNameTbx"
@@ -17,21 +25,23 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Nombre Apellido"
-            android:inputType="textPersonName"
-            android:text="holo"
+
+            android:hint="@{studenthint.hint}"
+            android:inputType="text"
             android:textSize="20sp" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/FloatingAddStudenBtn"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.19"
+            android:layout_height="30dp"
+            android:layout_weight="1"
             android:clickable="true"
+            android:onClick="NewEntryStudent"
             android:tint="@android:color/white"
             app:backgroundTint="@color/accent"
             app:fabSize="mini"
             app:srcCompat="@android:drawable/ic_input_add" />
+
     </LinearLayout>
 
-</LinearLayout>
+</layout>
