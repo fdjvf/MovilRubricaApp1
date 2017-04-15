@@ -1,14 +1,10 @@
 package co.edu.uninorte.movilrubricaapp1.Model;
 
-import android.databinding.BindingAdapter;
 import android.databinding.ObservableArrayList;
-import android.widget.ListView;
 
 import com.orm.SugarRecord;
 
 import java.util.ArrayList;
-
-import co.edu.uninorte.movilrubricaapp1.Adapters.CourseListAdapter;
 
 /**
  * Created by fdjvf on 4/11/2017.
@@ -34,11 +30,11 @@ public class Asignatura extends SugarRecord {
 
     }
 
-    @BindingAdapter("bind:CourseItems")
+ /*   @BindingAdapter("bind:CourseItems")
     public static void bindList(ListView view, ObservableArrayList<Object> list) {
         CourseListAdapter adapter = new CourseListAdapter(list);
         view.setAdapter(adapter);
-    }
+    }*/
 
     public String getName() {
         return name;

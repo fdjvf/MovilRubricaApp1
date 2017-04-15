@@ -31,6 +31,7 @@ public class CourseListAdapter extends ListAdapter {
 
         CursoFilaBinding binding;
         binding = DataBindingUtil.inflate(inflater, R.layout.curso_fila, parent, false);
+
         binding.setCourse((Asignatura) list.get(position));
         return binding.getRoot();
     }

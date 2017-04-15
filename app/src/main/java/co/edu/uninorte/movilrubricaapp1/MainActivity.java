@@ -11,13 +11,16 @@ import co.edu.uninorte.movilrubricaapp1.databinding.MainActivityBinding;
 
 public class MainActivity extends AppCompatActivity {
 
+
     MainActivityBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Asignatura.deleteAll(Asignatura.class);
         Rubrica.deleteAll(Rubrica.class);
+
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
+
         for (int i = 1; i < 4; i++) {
             Asignatura t = new Asignatura();
             t.setName("Curso " + i);
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         binding.viewpager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+
 
         //  binding.CoursesList.setSelection(0);//Permite que la lista comience en una posicion espeficia
 
