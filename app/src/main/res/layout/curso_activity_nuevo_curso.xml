@@ -1,106 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".NewCourse">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <variable
-            name="obj"
-            type="co.edu.uninorte.movilrubricaapp1.NewCourse"></variable>
-
-    </data>
-
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingEnd="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp">
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:text="Lista de Estudiantes"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintHorizontal_bias="0.583"
-            app:layout_constraintLeft_toLeftOf="@+id/NameTbx"
-            app:layout_constraintRight_toRightOf="@+id/NameTbx"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
-
-        <TextView
-            android:id="@+id/NameTbx"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:text="Nombre del Curso"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="21sp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/SaveCourseBtn"
-            android:layout_width="94dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:background="@color/accent"
-            android:elevation="0dp"
-            android:text="Crear"
-            android:textAllCaps="false"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintLeft_toLeftOf="@+id/StudentListView"
-            app:layout_constraintRight_toRightOf="@+id/StudentListView" />
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
-            android:ems="10"
-            android:hint="Nombre"
-            android:inputType="textPersonName"
-            app:layout_constraintHorizontal_bias="0.505"
-            app:layout_constraintLeft_toLeftOf="@+id/NameTbx"
-            app:layout_constraintRight_toRightOf="@+id/NameTbx"
-            app:layout_constraintTop_toBottomOf="@+id/NameTbx" />
-
-        <ListView
-            android:id="@+id/StudentListView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="257dp"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="8dp"
-            android:divider="@null"
-            android:dividerHeight="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/SaveCourseBtn"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintLeft_toLeftOf="@+id/textView6"
-            app:layout_constraintRight_toRightOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"
-            app:layout_constraintVertical_bias="0.187"
-            bind:NewStudentHints="@{obj.StudentHints}" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
 
-    </android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:text="Nombre del Curso"
+                android:textAlignment="center"
+                android:textColor="@color/primary"
+                android:textSize="20sp" />
 
+            <EditText
+                android:id="@+id/nombrecursoEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:ems="10"
+                android:hint="Nombre"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="37dp"
+                android:text="Lista de Estudiantes"
+                android:textAlignment="center"
+                android:textColor="@color/primary"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/nombreestudianteEt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:ems="10"
+                    android:hint="Nombre Apellido"
+                    android:inputType="textPersonName" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/FloatingAddStudenBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:clickable="true"
+                    android:onClick="addStudent"
+                    android:tint="@android:color/white"
+                    app:srcCompat="@android:drawable/ic_input_add" />
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/StudentListView"
+                android:layout_width="match_parent"
+                android:layout_height="142dp"
+                android:layout_weight="0.53" />
+
+            <Button
+                android:id="@+id/SaveCourseBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="26dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@color/cardview_shadow_start_color"
+                android:elevation="0dp"
+                android:onClick="crearCurso"
+                android:text="Crear Curso"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
 
 </layout>

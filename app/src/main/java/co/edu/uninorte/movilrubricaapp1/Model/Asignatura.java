@@ -16,8 +16,8 @@ import co.edu.uninorte.movilrubricaapp1.Adapters.CourseListAdapter;
 
 public class Asignatura extends SugarRecord {
 
-    public static ObservableArrayList<Object> list = new ObservableArrayList<>();
-    final static private boolean t = list.addAll(Asignatura.listAll(Asignatura.class));
+    public static ObservableArrayList<Object> list2 = new ObservableArrayList<>();
+    final static private boolean t = list2.addAll(Asignatura.listAll(Asignatura.class));
     String name;
     String description;
     ArrayList<Estudiante> estudiantes;
@@ -31,6 +31,7 @@ public class Asignatura extends SugarRecord {
         this.description = description;
         this.estudiantes = estudiantes;
         this.evaluaciones = evaluaciones;
+
     }
 
     @BindingAdapter("bind:CourseItems")
@@ -57,7 +58,7 @@ public class Asignatura extends SugarRecord {
 
     public void Save()
     {
-        list.add(this);
+        list2.add(this);
         this.save();
     }
 

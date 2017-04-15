@@ -40,7 +40,7 @@
             android:tint="@android:color/white"
             app:backgroundTint="@color/accent"
             app:fabSize="mini"
-            app:srcCompat="@android:drawable/ic_input_add" />
+            app:srcCompat="@android:drawable/ic_delete" />
 
     </LinearLayout>
 
