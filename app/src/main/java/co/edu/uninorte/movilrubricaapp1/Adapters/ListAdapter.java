@@ -19,6 +19,11 @@ public class ListAdapter extends BaseAdapter {
         this.list = list;
     }
 
+    public ListAdapter() {
+
+    }
+
+
     @Override
     public int getCount() {
         return list.size();

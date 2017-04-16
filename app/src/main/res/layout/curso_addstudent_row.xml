@@ -6,7 +6,7 @@
 
         <variable
             name="studenthint"
-            type="co.edu.uninorte.movilrubricaapp1.Adapters.StudentHint">
+            type="co.edu.uninorte.movilrubricaapp1.Model.Estudiante">
 
         </variable>
     </data>
@@ -15,8 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-
         android:weightSum="1">
 
         <EditText
@@ -25,18 +23,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-
-            android:hint="@{studenthint.hint}"
+            android:hint="Nombre del estudiante"
             android:inputType="text"
+            android:text="@={studenthint.name}"
             android:textSize="20sp" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/FloatingAddStudenBtn"
-            android:layout_width="wrap_content"
+            android:id="@+id/DeleteStudentRow"
+            android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_weight="1"
             android:clickable="true"
-            android:onClick="NewEntryStudent"
+            android:onClick="DeleteEntryStudent"
             android:tint="@android:color/white"
             app:backgroundTint="@color/accent"
             app:fabSize="mini"

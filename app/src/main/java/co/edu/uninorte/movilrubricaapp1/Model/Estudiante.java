@@ -2,17 +2,25 @@ package co.edu.uninorte.movilrubricaapp1.Model;
 
 import android.databinding.Bindable;
 import android.databinding.Observable;
+import android.databinding.ObservableArrayList;
 import android.databinding.PropertyChangeRegistry;
 
 import com.orm.SugarRecord;
 
 import java.util.ArrayList;
 
+import co.edu.uninorte.movilrubricaapp1.BR;
+
 
 public class Estudiante extends SugarRecord implements Observable {
-    String name;
+
+
+    public static ObservableArrayList<Object> listStudents = new ObservableArrayList<>();
+    //  final static private boolean t = listStudents.addAll(Estudiante.listAll(Estudiante.class));
+    String name = "";
     Boolean state;
     ArrayList<Evaluacion> Evaluaciones;
+
     private PropertyChangeRegistry registry = new PropertyChangeRegistry();
 
     public Estudiante() {
@@ -32,7 +40,7 @@ public class Estudiante extends SugarRecord implements Observable {
     @Bindable
     public void setName(String name) {
         this.name = name;
-        //    registry.notifyChange(this, BR);
+        registry.notifyChange(this, BR.studenthint);
     }
 
     public Boolean getState() {
@@ -44,6 +52,7 @@ public class Estudiante extends SugarRecord implements Observable {
         this.state = state;
         //     registry.notifyChange(this, BR.bar);
     }
+
 
     @Override
     public void addOnPropertyChangedCallback(OnPropertyChangedCallback onPropertyChangedCallback) {

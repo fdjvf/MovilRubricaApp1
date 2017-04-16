@@ -1,12 +1,15 @@
 package co.edu.uninorte.movilrubricaapp1.Adapters;
 
 import android.content.Context;
+import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import co.edu.uninorte.movilrubricaapp1.Model.Estudiante;
 import co.edu.uninorte.movilrubricaapp1.R;
 import co.edu.uninorte.movilrubricaapp1.databinding.CursoAddstudentRowBinding;
 
@@ -16,8 +19,33 @@ import co.edu.uninorte.movilrubricaapp1.databinding.CursoAddstudentRowBinding;
  */
 
 public class StudentAddAdapter extends ListAdapter {
-    public StudentAddAdapter(ObservableArrayList<Object> list) {
-        super(list);
+
+    protected ObservableArrayList<Estudiante> list;
+
+    public StudentAddAdapter(ObservableArrayList<Estudiante> list) {
+        super();
+        this.list = list;
+    }
+
+    @BindingAdapter("bind:NewStudent")
+    public static void bindList(ListView view, ObservableArrayList<Estudiante> list) {
+        StudentAddAdapter adapter = new StudentAddAdapter(list);
+        view.setAdapter(adapter);
+    }
+
+    @Override
+    public int getCount() {
+        return list.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return list.get(position);
     }
 
     @Override
@@ -30,7 +58,8 @@ public class StudentAddAdapter extends ListAdapter {
 
         CursoAddstudentRowBinding binding;
         binding = DataBindingUtil.inflate(inflater, R.layout.curso_addstudent_row, parent, false);
-        binding.setStudenthint((StudentHint) list.get(position));
+        binding.DeleteStudentRow.setTag(position);
+        binding.setStudenthint(list.get(position));
         return binding.getRoot();
     }
 }

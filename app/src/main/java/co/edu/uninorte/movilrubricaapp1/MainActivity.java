@@ -1,11 +1,13 @@
 package co.edu.uninorte.movilrubricaapp1;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import co.edu.uninorte.movilrubricaapp1.Model.Asignatura;
+import co.edu.uninorte.movilrubricaapp1.Model.Estudiante;
 import co.edu.uninorte.movilrubricaapp1.Model.Rubrica;
 import co.edu.uninorte.movilrubricaapp1.databinding.MainActivityBinding;
 
@@ -18,9 +20,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Asignatura.deleteAll(Asignatura.class);
         Rubrica.deleteAll(Rubrica.class);
+        Estudiante.deleteAll(Estudiante.class);
+
+
 
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
-
         for (int i = 1; i < 4; i++) {
             Asignatura t = new Asignatura();
             t.setName("Curso " + i);
@@ -39,19 +43,17 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
-
-
     public void StartNewCreationActivity(View view) {
 
         int page = binding.viewpager.getCurrentItem();
 
         if (page == 0) {
-            Asignatura asignatura = new Asignatura();
-            asignatura.setDescription("Breve Descripcion");
-            asignatura.setName("Materia " + Asignatura.list2.size());
-            asignatura.Save();
+            //Start Activity for New Course
+            Intent myIntent = new Intent(this, NewCourse.class);
+            startActivity(myIntent);
 
         } else {
+            //Start Activity for New Course
             Rubrica rubrica = new Rubrica();
             rubrica.setDescripcion("Breve Descripcion");
             rubrica.setName("Rubrica " + Rubrica.list.size());

@@ -31,6 +31,7 @@
                 android:layout_marginTop="16dp"
                 android:divider="@null"
                 android:dividerHeight="0dp"
+                android:tag="@{course.pagina}"
                 app:layoutManager="LinearLayoutManager"
                 app:layout_constraintHorizontal_bias="0.529"
                 app:layout_constraintLeft_toLeftOf="parent"
