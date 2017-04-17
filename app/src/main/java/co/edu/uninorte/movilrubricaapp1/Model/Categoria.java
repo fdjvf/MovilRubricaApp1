@@ -5,6 +5,7 @@ import android.databinding.ObservableArrayList;
 import com.orm.SugarRecord;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by fdjvf on 4/11/2017.
@@ -17,6 +18,11 @@ public class Categoria extends SugarRecord {
     String descripcion;
     ArrayList<Elemento> elementoArray;
 
+    public Rubrica rubrica;
+
+    public List<Elemento> getElementos(){
+        return Elemento.find(Elemento.class, "categoria = ?", String.valueOf(this.getId()));
+    }
     public Categoria() {
 
     }
