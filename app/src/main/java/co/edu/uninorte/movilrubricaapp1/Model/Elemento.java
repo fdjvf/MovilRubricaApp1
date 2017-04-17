@@ -9,6 +9,7 @@ import java.util.ArrayList;
  */
 
 public class Elemento extends SugarRecord {
+
     String name;
     Float peso;
     String descripcion;

@@ -9,8 +9,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,11 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewCourse">
-
-
-
-        </activity>
+        <activity android:name=".NewCourse" />
 
         <meta-data
             android:name="DATABASE"
@@ -36,6 +31,16 @@
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="co.edu.uninorte.movilrubricaapp1" />
+
+
+        <activity
+            android:name=".RubricaCreacion"
+            android:label="Crear Rubrica"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+
     </application>
 
 </manifest>

@@ -5,13 +5,14 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import co.edu.uninorte.movilrubricaapp1.Model.Asignatura;
 import co.edu.uninorte.movilrubricaapp1.Model.Estudiante;
 import co.edu.uninorte.movilrubricaapp1.Model.Rubrica;
 import co.edu.uninorte.movilrubricaapp1.databinding.MainActivityBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ItemFragment.OnListElementClick {
 
 
     MainActivityBinding binding;
@@ -53,11 +54,15 @@ public class MainActivity extends AppCompatActivity {
             startActivity(myIntent);
 
         } else {
+
+            Intent myIntent = new Intent(this, RubricaCreacion.class);
+            startActivity(myIntent);
+
             //Start Activity for New Course
-            Rubrica rubrica = new Rubrica();
+        /*   Rubrica rubrica = new Rubrica();
             rubrica.setDescripcion("Breve Descripcion");
             rubrica.setName("Rubrica " + Rubrica.list.size());
-            rubrica.Save();
+            rubrica.Save();*/
         }
 
 
@@ -66,5 +71,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onListFragmentInteraction(int position) {
+        int page = binding.viewpager.getCurrentItem();
+        if (page == 0) {
+            Toast.makeText(this, "Curso" + position, Toast.LENGTH_LONG).show();
+            //Comenzar activdad para el curso
+        } else {
+            Toast.makeText(this, "Rubrica" + position, Toast.LENGTH_LONG).show();
+            //Comenzar actividad para la rubrica
+        }
 
+    }
 }

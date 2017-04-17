@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class CalCategoria {
     Float notaCategoria;
+    Float peso;
     Categoria categoria;
     ArrayList<CalElemento> calElementoArray;
 

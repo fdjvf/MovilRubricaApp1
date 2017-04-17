@@ -16,11 +16,15 @@ import java.util.ArrayList;
 public class Asignatura extends SugarRecord implements Observable {
 
     public static ObservableArrayList<Object> list2 = new ObservableArrayList<>();
+    final static private boolean t = list2.addAll(Asignatura.listAll(Asignatura.class));
+
+
+
     String name = "";
     String description = "";
     ObservableArrayList<Estudiante> estudiantes = new ObservableArrayList<>();
     ArrayList<Evaluacion> evaluaciones;
-    //    final static private boolean t = list2.addAll(Asignatura.listAll(Asignatura.class));
+
     private PropertyChangeRegistry registry = new PropertyChangeRegistry();
 
     public Asignatura() {
@@ -32,14 +36,6 @@ public class Asignatura extends SugarRecord implements Observable {
         this.estudiantes = estudiantes;
         this.evaluaciones = evaluaciones;
 
-    }
-
-    public ObservableArrayList<Estudiante> getEstudiantes() {
-        return estudiantes;
-    }
-
-    public void setEstudiantes(ObservableArrayList<Estudiante> estudiantes) {
-        this.estudiantes = estudiantes;
     }
 
     @Bindable
@@ -63,6 +59,16 @@ public class Asignatura extends SugarRecord implements Observable {
         this.description = description;
         //      registry.notifyChange(this, BR.coursemodel);
     }
+
+    public ObservableArrayList<Estudiante> getEstudiantes() {
+        return estudiantes;
+    }
+
+    public void setEstudiantes(ObservableArrayList<Estudiante> estudiantes) {
+        this.estudiantes = estudiantes;
+    }
+
+
 
     public void Save()
     {

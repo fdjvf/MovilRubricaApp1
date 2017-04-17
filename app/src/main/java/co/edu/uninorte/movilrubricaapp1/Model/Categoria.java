@@ -1,5 +1,7 @@
 package co.edu.uninorte.movilrubricaapp1.Model;
 
+import android.databinding.ObservableArrayList;
+
 import com.orm.SugarRecord;
 
 import java.util.ArrayList;
@@ -9,19 +11,41 @@ import java.util.ArrayList;
  */
 
 public class Categoria extends SugarRecord {
+    public static ObservableArrayList<Object> list = new ObservableArrayList<>();
+    public boolean Selected = false;
     String name;
     String descripcion;
     ArrayList<Elemento> elementoArray;
-    Float peso;
 
     public Categoria() {
 
     }
 
-    public Categoria(String name, String descripcion, ArrayList<Elemento> elementoArray, Float peso) {
+    public Categoria(String name, String descripcion, ArrayList<Elemento> elementoArray) {
         this.name = name;
         this.descripcion = descripcion;
         this.elementoArray = elementoArray;
-        this.peso = peso;
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void Save() {
+        list.add(this);
+        this.save();
     }
 }

@@ -1,10 +1,11 @@
 package co.edu.uninorte.movilrubricaapp1;
 
+import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +20,10 @@ import co.edu.uninorte.movilrubricaapp1.databinding.FragmentListMainBinding;
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnListElementClick}
  * interface.
  */
-public class ItemFragment extends Fragment {
+public class ItemFragment extends ListFragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_PAGE = "pagina";
@@ -30,7 +31,7 @@ public class ItemFragment extends Fragment {
     //private static final String ARG_LISTA = "vector";
     // TODO: Customize parameters
     private int pagina = 1;
-    private OnListFragmentInteractionListener mListener;
+    private OnListElementClick mListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -69,6 +70,7 @@ public class ItemFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         FragmentListMainBinding bindingFragment = DataBindingUtil.inflate(inflater, R.layout.fragment_list_main, container, false);
+
         switch (pagina) {
             case 1:
                 list = Asignatura.list2;
@@ -99,18 +101,22 @@ public class ItemFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        mListener.onListFragmentInteraction(position);
 
+    }
 
-  /*  @Override
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof OnListElementClick) {
+            mListener = (OnListElementClick) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+                    + " must implement OnListElementClick");
         }
-    }*/
+    }
 
     @Override
     public void onDetach() {
@@ -128,8 +134,8 @@ public class ItemFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnListFragmentInteractionListener {
+    public interface OnListElementClick {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(View item);
+        void onListFragmentInteraction(int position);
     }
 }
