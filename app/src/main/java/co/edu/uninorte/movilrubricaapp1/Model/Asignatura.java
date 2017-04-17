@@ -8,6 +8,7 @@ import android.databinding.PropertyChangeRegistry;
 import com.orm.SugarRecord;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by fdjvf on 4/11/2017.
@@ -83,5 +84,12 @@ public class Asignatura extends SugarRecord implements Observable {
     public void removeOnPropertyChangedCallback(OnPropertyChangedCallback onPropertyChangedCallback) {
         registry.remove(onPropertyChangedCallback);
 
+    }
+    /*
+    public List<Estudiante> getEstudiantes(){
+        return Estudiante.find(Estudiante.class, "asignatura = ?", String.valueOf(this.getId()));
+    }*///ARREGLAR OBSERVABLE ARRAY NOMBRE
+    public List<Evaluacion> getEvaluaciones(){
+        return Evaluacion.find(Evaluacion.class, "asignatura = ?", String.valueOf(this.getId()));
     }
 }

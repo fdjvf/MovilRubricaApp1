@@ -9,6 +9,7 @@ import com.orm.SugarRecord;
 public class InfoNivel extends SugarRecord {
     String descripcion;
     int nivel;
+    Elemento elemento;
 
     public InfoNivel(String descripcion, int nivel) {
         this.descripcion = descripcion;

@@ -8,6 +8,7 @@ import android.databinding.PropertyChangeRegistry;
 import com.orm.SugarRecord;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import co.edu.uninorte.movilrubricaapp1.BR;
 
@@ -20,7 +21,11 @@ public class Estudiante extends SugarRecord implements Observable {
     String name = "";
     Boolean state;
     ArrayList<Evaluacion> Evaluaciones;
+    Asignatura asignatura;
 
+    public List<Evaluacion> getEvaluaciones(){
+        return Evaluacion.find(Evaluacion.class, "estudiante = ?", String.valueOf(this.getId()));
+    }
     private PropertyChangeRegistry registry = new PropertyChangeRegistry();
 
     public Estudiante() {
