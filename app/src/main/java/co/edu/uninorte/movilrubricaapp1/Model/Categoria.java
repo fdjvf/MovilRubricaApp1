@@ -59,6 +59,12 @@ public class Categoria extends SugarRecord {
 
     }
 
+    public List<Elemento> getElementoslista() {
+
+        return Elemento.find(Elemento.class, "categoria = ?", String.valueOf(this.getId()));
+
+    }
+
     public void Save() {
         Level = rubrica.EscalaMaxima;
         rubrica.ObservableListRubricaCategorias.add(this);

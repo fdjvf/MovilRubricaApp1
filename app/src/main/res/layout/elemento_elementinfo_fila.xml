@@ -50,7 +50,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.44"
-                        android:text="@{elementInfo.descripcion}"
+                        android:text="@={elementInfo.descripcion}"
                         android:textColor="@color/secondary"
                         android:textStyle="bold"
                         tools:text="E" />

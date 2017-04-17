@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
 
     MainActivityBinding binding;
+    Asignatura t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
         Rubrica.deleteAll(Rubrica.class);
         Estudiante.deleteAll(Estudiante.class);
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
-        Asignatura t = new Asignatura();
+        t = new Asignatura();
         for (int i = 1; i < 4; i++) {
 
             t.setName("Curso " + i);
@@ -45,11 +46,12 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     public void StartNewCreationActivity(View view) {
 
         int page = binding.viewpager.getCurrentItem();
+        t.setDescription(page + "");
 
         if (page == 0) {
 
-            Intent myIntent = new Intent(this, NewCourse.class);
-            startActivity(myIntent);
+          /*  Intent myIntent = new Intent(this, NewCourse.class);
+            startActivity(myIntent);*/
 
         } else {
 

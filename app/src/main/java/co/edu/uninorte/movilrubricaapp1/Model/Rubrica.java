@@ -58,6 +58,7 @@ public class Rubrica extends SugarRecord implements Observable {
     }
 
     public List<Categoria> getCategorias() {
+        ObservableListRubricaCategorias = new ObservableArrayList<>();
         List<Categoria> temp = Categoria.find(Categoria.class, "rubrica = ?", String.valueOf(this.getId()));
         ObservableListRubricaCategorias.addAll(temp);
         return temp;
