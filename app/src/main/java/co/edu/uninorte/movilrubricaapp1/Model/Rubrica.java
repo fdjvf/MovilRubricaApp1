@@ -4,7 +4,6 @@ import android.databinding.ObservableArrayList;
 
 import com.orm.SugarRecord;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,29 +11,25 @@ import java.util.List;
  */
 
 public class Rubrica extends SugarRecord {
-    public static ObservableArrayList<Object> list = new ObservableArrayList<>();
-    //    final static private boolean t = list.addAll(Rubrica.listAll(Rubrica.class));
+    public static ObservableArrayList<Object> ObservableListRubrica = new ObservableArrayList<>();
+    final static private boolean t = ObservableListRubrica.addAll(Rubrica.listAll(Rubrica.class));
+    public ObservableArrayList<Categoria> ObservableListRubricaCategorias;
+    public int EscalaMaxima;
     String name;
     String descripcion;
-    ArrayList<Categoria> categoriaArray;
-    int niveles;
-
-    public List<Categoria> getCategorias(){
-        return Categoria.find(Categoria.class, "rubrica = ?", String.valueOf(this.getId()));
-    }
 
     public Rubrica() {
     }
 
-    public Rubrica(String name, ArrayList<Categoria> categoriaArray, int niveles, String descripcion) {
+    public Rubrica(String name, int niveles, String descripcion) {
         this.name = name;
-        this.categoriaArray = categoriaArray;
-        this.niveles = niveles;
+        this.EscalaMaxima = niveles;
         this.descripcion = descripcion;
     }
+
     public String getName() {
         return name;
-    }
+    }//Implementar Observable en el Display
 
     public void setName(String name) {
         this.name = name;
@@ -48,24 +43,13 @@ public class Rubrica extends SugarRecord {
         this.descripcion = descripcion;
     }
 
-    public ArrayList<Categoria> getCategoriaArray() {
-        return categoriaArray;
+    public List<Categoria> getCategorias() {
+        List<Categoria> temp = Categoria.find(Categoria.class, "rubrica = ?", String.valueOf(this.getId()));
+        ObservableListRubricaCategorias.addAll(temp);
+        return temp;
     }
-
-    public void setCategoriaArray(ArrayList<Categoria> categoriaArray) {
-        this.categoriaArray = categoriaArray;
-    }
-
-    public int getNiveles() {
-        return niveles;
-    }
-
-    public void setNiveles(int niveles) {
-        this.niveles = niveles;
-    }
-
     public void Save() {
-        list.add(this);
+        ObservableListRubrica.add(this);
         this.save();
     }
 

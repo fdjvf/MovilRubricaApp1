@@ -2,30 +2,25 @@ package co.edu.uninorte.movilrubricaapp1.Model;
 
 import com.orm.SugarRecord;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by fdjvf on 4/11/2017.
  */
 
 public class Evaluacion extends SugarRecord {
 
-    Rubrica rubric;
-    Float nota;
-    ArrayList<CalCategoria> calCategoriaArray;
+    Rubrica rubrica;
+    String Nombre;
     Asignatura asignatura;
-    Estudiante estudiante;
 
-    List<CalCategoria> getCalCategorias(){
-        return CalCategoria.find(CalCategoria.class, "evaluacion = ?", String.valueOf(this.getId()));
-    }
-    //creacion de calcategoria FALTA
+    //Siempre antes de guardar estos, ya se debdio haber guardado la rubrica y la asignatura
     public Evaluacion() {
+
     }
 
-    public Evaluacion(Rubrica rubric) {
-        this.rubric = rubric;
+    public Evaluacion(Rubrica rubric, String nombre, Asignatura curso) {
+        this.rubrica = rubric;
+        this.Nombre = nombre;
+        this.asignatura = curso;
 
     }
 

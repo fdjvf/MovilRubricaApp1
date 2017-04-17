@@ -7,36 +7,31 @@ import android.databinding.PropertyChangeRegistry;
 
 import com.orm.SugarRecord;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import co.edu.uninorte.movilrubricaapp1.BR;
 
 /**
  * Created by fdjvf on 4/11/2017.
  */
 
 public class Asignatura extends SugarRecord implements Observable {
+    //Manejo de Binding
 
-    public static ObservableArrayList<Object> list2 = new ObservableArrayList<>();
-    final static private boolean t = list2.addAll(Asignatura.listAll(Asignatura.class));
-
-
-
+    public static ObservableArrayList<Object> ObserVableAsignaturas = new ObservableArrayList<>();
+    final static private boolean l = ObserVableAsignaturas.addAll(Asignatura.listAll(Asignatura.class));
+    public ObservableArrayList<Estudiante> ObservableEstudiantesCurso = new ObservableArrayList<>();
+    public ObservableArrayList<Evaluacion> ObservableEvaluacionesCurso = new ObservableArrayList<>();
     String name = "";
     String description = "";
-    ObservableArrayList<Estudiante> estudiantes = new ObservableArrayList<>();
-    ArrayList<Evaluacion> evaluaciones;
-
     private PropertyChangeRegistry registry = new PropertyChangeRegistry();
 
     public Asignatura() {
     }
 
-    public Asignatura(String name, String description, ObservableArrayList<Estudiante> estudiantes, ArrayList<Evaluacion> evaluaciones, PropertyChangeRegistry registry1) {
+    public Asignatura(String name, String description) {
         this.name = name;
         this.description = description;
-        this.estudiantes = estudiantes;
-        this.evaluaciones = evaluaciones;
-
     }
 
     @Bindable
@@ -47,7 +42,7 @@ public class Asignatura extends SugarRecord implements Observable {
     @Bindable
     public void setName(String name) {
         this.name = name;
-        //    registry.notifyChange(this, BR.);
+        registry.notifyChange(this, BR.coursemodel);//Permite doble binding
     }
 
     @Bindable
@@ -58,28 +53,31 @@ public class Asignatura extends SugarRecord implements Observable {
     @Bindable
     public void setDescription(String description) {
         this.description = description;
-        //      registry.notifyChange(this, BR.coursemodel);
+        registry.notifyChange(this, BR.coursemodel);
     }
 
-    public ObservableArrayList<Estudiante> getEstudiantes() {
-        return estudiantes;
-    }
-
-    public void setEstudiantes(ObservableArrayList<Estudiante> estudiantes) {
-        this.estudiantes = estudiantes;
-    }
-
-
-
+    //Solo utilizar para creacion, de resto utilizar el save
     public void Save()
     {
-        list2.add(this);
+        ObserVableAsignaturas.add(this);
         this.save();
-        for (Estudiante t : estudiantes) {
+        for (Estudiante t : ObservableEstudiantesCurso) {
             t.save();
         }
     }
 
+    public List<Estudiante> getEstudiante() {
+        List<Estudiante> temp = Estudiante.find(Estudiante.class, "asignatura = ?", String.valueOf(this.getId()));
+        ObservableEstudiantesCurso.addAll(temp);//Nuevo estudiante, se guarda el solo y ademas se guarda en este observable
+        return temp;
+    }
+
+    public List<Evaluacion> getEvaluaciones() {
+        List<Evaluacion> temp = Evaluacion.find(Evaluacion.class, "asignatura = ?", String.valueOf(this.getId()));
+
+        ObservableEvaluacionesCurso.addAll(temp);//Nuevo estudiante, se guarda el solo y ademas se guarda en este observable
+        return temp;
+    }
 
     @Override
     public void addOnPropertyChangedCallback(OnPropertyChangedCallback onPropertyChangedCallback) {
@@ -91,11 +89,6 @@ public class Asignatura extends SugarRecord implements Observable {
         registry.remove(onPropertyChangedCallback);
 
     }
-    /*
-    public List<Estudiante> getEstudiantes(){
-        return Estudiante.find(Estudiante.class, "asignatura = ?", String.valueOf(this.getId()));
-    }*///ARREGLAR OBSERVABLE ARRAY NOMBRE
-    public List<Evaluacion> getEvaluaciones(){
-        return Evaluacion.find(Evaluacion.class, "asignatura = ?", String.valueOf(this.getId()));
-    }
+
+
 }

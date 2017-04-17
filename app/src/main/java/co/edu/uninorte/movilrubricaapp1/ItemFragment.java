@@ -18,7 +18,7 @@ import co.edu.uninorte.movilrubricaapp1.Model.Rubrica;
 import co.edu.uninorte.movilrubricaapp1.databinding.FragmentListMainBinding;
 
 /**
- * A fragment representing a list of Items.
+ * A fragment representing a ObservableListCategoria of Items.
  * <p/>
  * Activities containing this fragment MUST implement the {@link OnListElementClick}
  * interface.
@@ -56,10 +56,10 @@ public class ItemFragment extends ListFragment {
         int pag = (int) view.getTag();
         switch (pag) {
             case 1:
-                view.setAdapter(new CourseListAdapter(Asignatura.list2));
+                view.setAdapter(new CourseListAdapter(Asignatura.ObserVableAsignaturas));
                 break;
             case 2:
-                view.setAdapter(new RubricaListAdapter(Rubrica.list));
+                view.setAdapter(new RubricaListAdapter(Rubrica.ObservableListRubrica));
                 break;
 
         }
@@ -73,10 +73,10 @@ public class ItemFragment extends ListFragment {
 
         switch (pagina) {
             case 1:
-                list = Asignatura.list2;
+                list = Asignatura.ObserVableAsignaturas;
                 break;
             case 2:
-                list = Rubrica.list;
+                list = Rubrica.ObservableListRubrica;
                 break;
         }
 

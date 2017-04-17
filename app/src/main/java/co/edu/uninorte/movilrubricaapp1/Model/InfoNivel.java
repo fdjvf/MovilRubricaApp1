@@ -20,5 +20,29 @@ public class InfoNivel extends SugarRecord {
 
     }
 
+    public Elemento getElemento() {
+        return elemento;
+    }
+
+    public void setElemento(Elemento elemento) {
+        this.elemento = elemento;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
 
 }

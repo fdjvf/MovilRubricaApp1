@@ -21,7 +21,7 @@ public class NewCourse extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         CursoActivityNuevoCursoBinding binding = DataBindingUtil.setContentView(this, R.layout.curso_activity_nuevo_curso);
         newAsignatura = new Asignatura();
-        CourseStudents = newAsignatura.getEstudiantes();
+        //   CourseStudents = newAsignatura.getEstudiantes();
 
         binding.setStudentModel(this);
         binding.setCoursemodel(newAsignatura);

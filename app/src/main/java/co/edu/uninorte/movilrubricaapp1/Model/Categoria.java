@@ -4,7 +4,6 @@ import android.databinding.ObservableArrayList;
 
 import com.orm.SugarRecord;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,31 +11,28 @@ import java.util.List;
  */
 
 public class Categoria extends SugarRecord {
-    public static ObservableArrayList<Object> list = new ObservableArrayList<>();
-    public boolean Selected = false;
-    String name;
-    String descripcion;
-    ArrayList<Elemento> elementoArray;
 
     public Rubrica rubrica;
+    public ObservableArrayList<Object> ObservableListElements;
+    public boolean Selected = false;
 
-    public List<Elemento> getElementos(){
-        return Elemento.find(Elemento.class, "categoria = ?", String.valueOf(this.getId()));
-    }
+    String name;
+    String descripcion;
+
     public Categoria() {
 
     }
 
-    public Categoria(String name, String descripcion, ArrayList<Elemento> elementoArray) {
+    public Categoria(String name, String descripcion, Rubrica rubrica1) {
         this.name = name;
         this.descripcion = descripcion;
-        this.elementoArray = elementoArray;
+        this.rubrica = rubrica1;
 
     }
 
     public String getName() {
         return name;
-    }
+    }//Implementar Binding tWO wAY
 
     public void setName(String name) {
         this.name = name;
@@ -50,8 +46,15 @@ public class Categoria extends SugarRecord {
         this.descripcion = descripcion;
     }
 
+    public List<Elemento> getElementos() {
+        List<Elemento> elementos = Elemento.find(Elemento.class, "categoria = ?", String.valueOf(this.getId()));
+        ObservableListElements.addAll(elementos);
+        return elementos;
+    }
+
     public void Save() {
-        list.add(this);
+
+        rubrica.ObservableListRubricaCategorias.add(this);
         this.save();
     }
 }

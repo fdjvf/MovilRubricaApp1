@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
             //Start Activity for New Course
         /*   Rubrica rubrica = new Rubrica();
             rubrica.setDescripcion("Breve Descripcion");
-            rubrica.setName("Rubrica " + Rubrica.list.size());
+            rubrica.setName("Rubrica " + Rubrica.ObservableListCategoria.size());
             rubrica.Save();*/
         }
 
