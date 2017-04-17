@@ -13,22 +13,18 @@ import co.edu.uninorte.movilrubricaapp1.databinding.CursoActivityNuevoCursoBindi
 
 public class NewCourse extends AppCompatActivity {
 
-    public ObservableArrayList<Estudiante> CourseStudents;
+    public ObservableArrayList<Estudiante> CourseStudents = new ObservableArrayList<>();
     public Estudiante FirstStudent = new Estudiante();
     public Asignatura newAsignatura;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         CursoActivityNuevoCursoBinding binding = DataBindingUtil.setContentView(this, R.layout.curso_activity_nuevo_curso);
-        newAsignatura = new Asignatura();
-        //   CourseStudents = newAsignatura.getEstudiantes();
 
+        newAsignatura = new Asignatura();
         binding.setStudentModel(this);
         binding.setCoursemodel(newAsignatura);
         binding.setFirststudent(FirstStudent);
-
-
-        //      StudentHints.add(new StudentHint("Estudiante " + StudentHints.size()));
 
     }
 
@@ -37,26 +33,24 @@ public class NewCourse extends AppCompatActivity {
         //    StudentHints.add(new StudentHint("Estudiante " + StudentHint.Count));//Floatin Button
         Estudiante estudiante = new Estudiante();
         CourseStudents.add(estudiante);
-
-
-
-
     }
 
     public void SaveCourse(View view) {
-        CourseStudents.add(FirstStudent);
         newAsignatura.Save();
+        CourseStudents.add(FirstStudent);
+        for (Estudiante t : CourseStudents) {
+            t.setAsignatura(newAsignatura);
+            t.save();
+        }
         this.finish();
 
-        //Guardar Curso
+
     }
 
     public void DeleteEntryStudent(View view) {
         int pos = (int) view.getTag();
         CourseStudents.remove(pos);
-        //Borra un student
-
-
+        //Remueve un estudiante
     }
 
 }

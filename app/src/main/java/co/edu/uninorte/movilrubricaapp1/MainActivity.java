@@ -22,10 +22,8 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
         Asignatura.deleteAll(Asignatura.class);
         Rubrica.deleteAll(Rubrica.class);
         Estudiante.deleteAll(Estudiante.class);
-
-
-
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
+
         for (int i = 1; i < 4; i++) {
             Asignatura t = new Asignatura();
             t.setName("Curso " + i);
@@ -49,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
         int page = binding.viewpager.getCurrentItem();
 
         if (page == 0) {
-            //Start Activity for New Course
+
             Intent myIntent = new Intent(this, NewCourse.class);
             startActivity(myIntent);
 
@@ -58,17 +56,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
             Intent myIntent = new Intent(this, RubricaCreacion.class);
             startActivity(myIntent);
 
-            //Start Activity for New Course
-        /*   Rubrica rubrica = new Rubrica();
-            rubrica.setDescripcion("Breve Descripcion");
-            rubrica.setName("Rubrica " + Rubrica.ObservableListCategoria.size());
-            rubrica.Save();*/
         }
-
-
-
-
-
     }
 
     @Override

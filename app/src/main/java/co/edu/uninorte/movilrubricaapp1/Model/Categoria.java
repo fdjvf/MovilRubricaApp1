@@ -15,10 +15,9 @@ public class Categoria extends SugarRecord {
     public Rubrica rubrica;
     public ObservableArrayList<Object> ObservableListElements;
     public boolean Selected = false;
-
+    public int Level;
     String name;
     String descripcion;
-
     public Categoria() {
 
     }
@@ -28,6 +27,14 @@ public class Categoria extends SugarRecord {
         this.descripcion = descripcion;
         this.rubrica = rubrica1;
 
+    }
+
+    public static ObservableArrayList<Object> getCategorias(int nivel) {
+
+        List<Categoria> categorias = Categoria.find(Categoria.class, "Level = ?", Integer.toString(nivel));
+        ObservableArrayList<Object> observableArrayList = new ObservableArrayList();
+        observableArrayList.addAll(categorias);
+        return observableArrayList;
     }
 
     public String getName() {
@@ -46,14 +53,14 @@ public class Categoria extends SugarRecord {
         this.descripcion = descripcion;
     }
 
-    public List<Elemento> getElementos() {
+    public boolean getElementos() {
         List<Elemento> elementos = Elemento.find(Elemento.class, "categoria = ?", String.valueOf(this.getId()));
-        ObservableListElements.addAll(elementos);
-        return elementos;
+        return ObservableListElements.addAll(elementos);
+
     }
 
     public void Save() {
-
+        Level = rubrica.EscalaMaxima;
         rubrica.ObservableListRubricaCategorias.add(this);
         this.save();
     }

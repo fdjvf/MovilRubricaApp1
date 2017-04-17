@@ -19,9 +19,11 @@ public class Asignatura extends SugarRecord implements Observable {
     //Manejo de Binding
 
     public static ObservableArrayList<Object> ObserVableAsignaturas = new ObservableArrayList<>();
-    final static private boolean l = ObserVableAsignaturas.addAll(Asignatura.listAll(Asignatura.class));
+//    final static private boolean l = ObserVableAsignaturas.addAll(Asignatura.listAll(Asignatura.class));
+
     public ObservableArrayList<Estudiante> ObservableEstudiantesCurso = new ObservableArrayList<>();
     public ObservableArrayList<Evaluacion> ObservableEvaluacionesCurso = new ObservableArrayList<>();
+
     String name = "";
     String description = "";
     private PropertyChangeRegistry registry = new PropertyChangeRegistry();
@@ -61,15 +63,12 @@ public class Asignatura extends SugarRecord implements Observable {
     {
         ObserVableAsignaturas.add(this);
         this.save();
-        for (Estudiante t : ObservableEstudiantesCurso) {
-            t.save();
-        }
     }
 
-    public List<Estudiante> getEstudiante() {
+    public boolean getEstudiante() {
         List<Estudiante> temp = Estudiante.find(Estudiante.class, "asignatura = ?", String.valueOf(this.getId()));
-        ObservableEstudiantesCurso.addAll(temp);//Nuevo estudiante, se guarda el solo y ademas se guarda en este observable
-        return temp;
+        return ObservableEstudiantesCurso.addAll(temp);//Nuevo estudiante, se guarda el solo y ademas se guarda en este observable
+
     }
 
     public List<Evaluacion> getEvaluaciones() {

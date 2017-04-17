@@ -32,15 +32,11 @@
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="co.edu.uninorte.movilrubricaapp1" />
 
-
         <activity
             android:name=".RubricaCreacion"
             android:label="Crear Rubrica"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".CategoriaCreacion"></activity>
     </application>
 
 </manifest>
