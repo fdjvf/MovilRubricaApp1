@@ -35,8 +35,9 @@
         <activity
             android:name=".RubricaCreacion"
             android:label="Crear Rubrica"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".CategoriaCreacion"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CategoriaCreacion" />
+        <activity android:name=".ElementoCreacion"></activity>
     </application>
 
 </manifest>

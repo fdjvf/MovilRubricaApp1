@@ -4,7 +4,7 @@
     <string name="title_activity_rubrica_creacion">rubrica_creacion</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="action_settings">Ingresar Descripcion</string>
-
+    <string name="level">"Nivel "</string>
     <string-array name="spinnerItems">
         <item>3</item>
         <item>4</item>

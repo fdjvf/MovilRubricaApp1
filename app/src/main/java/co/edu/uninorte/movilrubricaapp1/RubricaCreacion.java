@@ -17,13 +17,14 @@ import co.edu.uninorte.movilrubricaapp1.Model.Categoria;
 import co.edu.uninorte.movilrubricaapp1.Model.Rubrica;
 import co.edu.uninorte.movilrubricaapp1.databinding.RubricaCreacionBinding;
 import co.edu.uninorte.movilrubricaapp1.databinding.RubricaCreacionContentBinding;
-import co.edu.uninorte.movilrubricaapp1.databinding.TexboxinputBinding;
+import co.edu.uninorte.movilrubricaapp1.databinding.RubricaDescripcionInputBinding;
+
 
 public class RubricaCreacion extends AppCompatActivity {
 
     public ObservableArrayList<Object> mylist = new ObservableArrayList<>();
     public Rubrica rubrica;
-    TexboxinputBinding texboxinputBinding;
+    RubricaDescripcionInputBinding texboxinputBinding;
     private Boolean doSomething = false;
 
     @Override
@@ -47,7 +48,7 @@ public class RubricaCreacion extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent temp = new Intent(RubricaCreacion.this, CategoriaCreacion.class);
-                temp.putExtra("Nivel", (int) rubricaCreacionContentBinding.LevelsSpinner.getSelectedItem());
+                temp.putExtra("Nivel", Integer.valueOf(rubricaCreacionContentBinding.LevelsSpinner.getSelectedItem().toString()));
                 startActivityForResult(temp, 1);
 
 
@@ -105,7 +106,7 @@ public class RubricaCreacion extends AppCompatActivity {
 
             final AlertDialog.Builder Alertbuilder = new AlertDialog.Builder(
                     RubricaCreacion.this, R.style.Theme_AppCompat_Dialog_Alert);
-            texboxinputBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.texboxinput, null, false);
+            texboxinputBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.rubrica_descripcion_input, null, false);
             texboxinputBinding.setDescripcionRubrica(rubrica);
             Alertbuilder.setTitle("Ingresar descripcion");
             Alertbuilder.setCancelable(false);
@@ -121,7 +122,7 @@ public class RubricaCreacion extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
-                    rubrica.setName("");
+                    rubrica.setDescripcion("");
 
                 }
             });

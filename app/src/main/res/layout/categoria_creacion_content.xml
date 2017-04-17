@@ -7,12 +7,12 @@
     <data>
 
         <variable
-            name="rubricamodel"
-            type="co.edu.uninorte.movilrubricaapp1.Model.Rubrica" />
+            name="elementList"
+            type="co.edu.uninorte.movilrubricaapp1.CategoriaCreacion" />
 
         <variable
-            name="categoriamodel"
-            type="co.edu.uninorte.movilrubricaapp1.RubricaCreacion" />
+            name="categoriabinding"
+            type="co.edu.uninorte.movilrubricaapp1.Model.Categoria" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -23,20 +23,6 @@
         tools:showIn="@layout/rubrica_creacion">
 
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="181dp"
-            android:layout_height="29dp"
-            android:layout_marginTop="10dp"
-            android:text="Nivel de evaluacion"
-            android:textColor="@android:color/white"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintHorizontal_bias="0.05"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nombrerubricatbx" />
-
-        <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,7 +31,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="Nombre de la Rubrica"
+            android:text="Nombre de la Categoria"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -54,37 +40,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/nombrerubricatbx"
+            android:id="@+id/nombrecategoriatbx"
             android:layout_width="343dp"
             android:layout_height="40dp"
             android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="Nombre"
             android:inputType="textPersonName"
-            android:text="@={rubricamodel.name}"
+            android:text="@={categoriabinding.name}"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintLeft_toLeftOf="@+id/textView"
             app:layout_constraintRight_toRightOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-        <Spinner
-            android:id="@+id/LevelsSpinner"
-            android:layout_width="151dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-
-            android:entries="@array/spinnerItems"
-            app:layout_constraintBottom_toBottomOf="@+id/textView3"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toRightOf="@+id/textView3"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView3"
-            app:layout_constraintVertical_bias="1.0"
-            tools:layout_editor_absoluteX="238dp" />
 
         <TextView
             android:id="@+id/textView4"
@@ -93,12 +60,12 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="4dp"
-            android:text="Agregar Categoria"
+            android:text="Agregar Elemento"
             android:textSize="20sp"
             app:layout_constraintHorizontal_bias="0.763"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/CategoriasDisponiblesListView" />
+            app:layout_constraintTop_toBottomOf="@+id/ElementosListView" />
 
         <TextView
             android:id="@+id/textView8"
@@ -106,30 +73,31 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="13dp"
-            android:text="Categorias Seleccionadas"
+            android:layout_marginTop="72dp"
+            android:text="Elementos"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintHorizontal_bias="0.408"
+            app:layout_constraintHorizontal_bias="0.541"
             app:layout_constraintLeft_toLeftOf="@+id/textView"
             app:layout_constraintRight_toRightOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <ListView
-            android:id="@+id/CategoriasDisponiblesListView"
-            android:layout_width="336dp"
-            android:layout_height="263dp"
+            android:id="@+id/ElementosListView"
+            android:layout_width="354dp"
+            android:layout_height="299dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="0dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="28dp"
             android:divider="@null"
             android:dividerHeight="0dp"
-            app:layout_constraintHorizontal_bias="0.541"
+            app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintLeft_toLeftOf="@+id/textView8"
             app:layout_constraintRight_toRightOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/textView8"
-            bind:NewCategoria="@{categoriamodel.mylist}" />
+            bind:NewElement="@{elementList.ElementList}"
+            tools:layout_editor_absoluteX="7dp" />
         <!--      categoriamodel        EL unico que necesita binding-->
 
     </android.support.constraint.ConstraintLayout>

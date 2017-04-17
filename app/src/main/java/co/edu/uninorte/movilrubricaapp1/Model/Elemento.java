@@ -14,7 +14,6 @@ public class Elemento extends SugarRecord {
 
     public ObservableArrayList<InfoNivel> ObservableDescricionNivel;
     String name;
-    String descripcion;
     Categoria categoria;
 
     public Elemento() {
@@ -24,7 +23,6 @@ public class Elemento extends SugarRecord {
 
     public Elemento(String name, Float peso, String descripcion, Categoria categoria) {
         this.name = name;
-        this.descripcion = descripcion;
         this.categoria = categoria;
     }
 
@@ -42,14 +40,6 @@ public class Elemento extends SugarRecord {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;//Considerar TwoBinding
     }
 
     public List<InfoNivel> getInfoNivel() {
