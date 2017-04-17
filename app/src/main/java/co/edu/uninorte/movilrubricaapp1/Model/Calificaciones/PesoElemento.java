@@ -1,4 +1,4 @@
-package co.edu.uninorte.movilrubricaapp1.Model;
+package co.edu.uninorte.movilrubricaapp1.Model.Calificaciones;
 
 import com.orm.SugarRecord;
 

@@ -2,13 +2,16 @@ package co.edu.uninorte.movilrubricaapp1.Model;
 
 import com.orm.SugarRecord;
 
+import java.util.List;
+
+import co.edu.uninorte.movilrubricaapp1.Model.Calificaciones.CalCategoria;
+
 /**
  * Created by fdjvf on 4/16/2017.
  */
 
 public class Calificacion extends SugarRecord {
 
-    Float nota;
     Evaluacion evaluacion;
     Estudiante estudiante;
 
@@ -17,17 +20,19 @@ public class Calificacion extends SugarRecord {
     }
 
     public Calificacion(float nota, Evaluacion eval, Estudiante student) {
-        this.nota = nota;
         this.evaluacion = eval;
         this.estudiante = student;
     }
 
-    public Float getNota() {
-        return nota;
-    }
+    public float getNotaFinal() {
+        float Sum = 0;
+        List<CalCategoria> notascal = CalCategoria.find(CalCategoria.class, "calificacion = ?", String.valueOf(getId()));
 
-    public void setNota(Float nota) {
-        this.nota = nota;
+        for (CalCategoria caltegoria : notascal) {
+            Sum = Sum + caltegoria.getNotaFinal();
+        }
+
+        return Sum;
     }
 
     public Evaluacion getEvaluacion() {

@@ -1,8 +1,10 @@
-package co.edu.uninorte.movilrubricaapp1.Model;
+package co.edu.uninorte.movilrubricaapp1.Model.Calificaciones;
 
 import com.orm.SugarRecord;
 
 import java.util.List;
+
+import co.edu.uninorte.movilrubricaapp1.Model.Calificacion;
 
 /**
  * Created by fdjvf on 4/16/2017.
@@ -10,11 +12,19 @@ import java.util.List;
 
 public class CalCategoria extends SugarRecord {
 
-
+    Calificacion calificacion;
     float pesoCategoria;
 
     public CalCategoria() {
 
+    }
+
+    public Calificacion getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(Calificacion calificacion) {
+        this.calificacion = calificacion;
     }
 
     public float getPesoCategoria() {

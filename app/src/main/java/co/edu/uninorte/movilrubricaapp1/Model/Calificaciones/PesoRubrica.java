@@ -1,8 +1,10 @@
-package co.edu.uninorte.movilrubricaapp1.Model;
+package co.edu.uninorte.movilrubricaapp1.Model.Calificaciones;
 
 import com.orm.SugarRecord;
 
 import java.util.List;
+
+import co.edu.uninorte.movilrubricaapp1.Model.Evaluacion;
 
 /**
  * Created by fdjvf on 4/16/2017.
