@@ -10,7 +10,11 @@ import java.util.List;
 
 public class PesoRubrica extends SugarRecord {
 
-    Rubrica rubrica;
+    Evaluacion evaluacion;
+
+    public PesoRubrica() {
+
+    }
 
     public List<PesoCategoria> getPesosCategoria() {
 

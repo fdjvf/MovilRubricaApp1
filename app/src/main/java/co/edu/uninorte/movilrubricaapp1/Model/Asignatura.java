@@ -74,7 +74,6 @@ public class Asignatura extends SugarRecord implements Observable {
 
     public List<Evaluacion> getEvaluaciones() {
         List<Evaluacion> temp = Evaluacion.find(Evaluacion.class, "asignatura = ?", String.valueOf(this.getId()));
-
         ObservableEvaluacionesCurso.addAll(temp);//Nuevo estudiante, se guarda el solo y ademas se guarda en este observable
         return temp;
     }

@@ -8,7 +8,6 @@ import com.orm.SugarRecord;
 
 public class Evaluacion extends SugarRecord {
 
-    Rubrica rubrica;
     String Nombre;
     Asignatura asignatura;
 
@@ -17,11 +16,11 @@ public class Evaluacion extends SugarRecord {
 
     }
 
-    public Evaluacion(Rubrica rubric, String nombre, Asignatura curso) {
-        this.rubrica = rubric;
+    public Evaluacion(String nombre, Asignatura curso) {
         this.Nombre = nombre;
         this.asignatura = curso;
 
     }
+
 
 }
