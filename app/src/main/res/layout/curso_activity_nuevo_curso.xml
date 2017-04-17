@@ -26,6 +26,21 @@
         tools:layout_editor_absoluteY="0dp">
 
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@color/bar_color"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/CourseName"
             android:layout_width="wrap_content"
@@ -50,13 +65,13 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="Nombre del Curso"
             android:textColor="@color/primary"
             android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 
         <EditText
             android:id="@+id/DescripctionTbx"
@@ -108,32 +123,34 @@
         <Button
             android:id="@+id/SaveCourse"
             android:layout_width="94dp"
-            android:layout_height="36dp"
+            android:layout_height="48dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:background="@color/accent"
+            android:background="@color/primary_dark"
             android:onClick="SaveCourse"
             android:text="Crear"
             android:textAllCaps="false"
             android:textColor="@color/primary"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="@+id/StudentsListView"
             app:layout_constraintRight_toRightOf="@+id/StudentsListView"
             app:layout_constraintTop_toTopOf="@+id/StudentsListView"
-            app:layout_constraintVertical_bias="0.963" />
+            app:layout_constraintVertical_bias="0.911" />
 
         <ListView
             android:id="@+id/StudentsListView"
-            android:layout_width="match_parent"
+            android:layout_width="344dp"
             android:layout_height="180dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="-10dp"
+            android:layout_marginStart="8dp"
             android:divider="@null"
             android:dividerHeight="0dp"
             app:layout_constraintHorizontal_bias="1.0"
@@ -144,11 +161,11 @@
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="229dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="0dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"

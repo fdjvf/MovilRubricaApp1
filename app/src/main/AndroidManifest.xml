@@ -34,10 +34,13 @@
 
         <activity
             android:name=".RubricaCreacion"
-            android:label="Crear Rubrica"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".CategoriaCreacion" />
-        <activity android:name=".ElementoCreacion"></activity>
+            android:label="Crear Rubrica" />
+        <activity
+            android:name=".CategoriaCreacion"
+            android:label="Crear Categoria" />
+        <activity
+            android:name=".ElementoCreacion"
+            android:label="Crear Elemento"></activity>
     </application>
 
 </manifest>

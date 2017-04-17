@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
         Rubrica.deleteAll(Rubrica.class);
         Estudiante.deleteAll(Estudiante.class);
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
-
+        Asignatura t = new Asignatura();
         for (int i = 1; i < 4; i++) {
-            Asignatura t = new Asignatura();
+
             t.setName("Curso " + i);
             t.setDescription("Breve Descripcion");
             t.Save();
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
             r.setDescripcion("Breve Descripcion");
             r.Save();
         }
-
+        //Cuando se crea el elemento ya queda registradoo, puede modificarlo y luego guardarlo de nuevoo
         binding.viewpager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
 
 
