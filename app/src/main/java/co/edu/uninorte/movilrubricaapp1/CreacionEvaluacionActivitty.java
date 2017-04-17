@@ -1,9 +1,12 @@
 package co.edu.uninorte.movilrubricaapp1;
 
 import android.content.Context;
+import android.databinding.BindingAdapter;
+import android.databinding.ObservableArrayList;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,6 +28,7 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
 
 
     public List<Rubrica> RubricList;
+    public ObservableArrayList<Object> spinnerlist;
     Spinner spinner;
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
@@ -32,6 +36,11 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
     HashMap<String, List<String>> listDataChild;
     EditText ed;
 
+    @BindingAdapter("bind:RubricaSpinner")
+    public static void bindList(Spinner view, ObservableArrayList<Object> list) {
+     /*  CategoriaAddListAdapter adapter = new CategoriaAddListAdapter(list);
+        view.setAdapter(adapter);*/
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +55,9 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
         ArrayList<Categoria> cats = new ArrayList<>();
         spinner = (Spinner) findViewById(R.id.spinnerRubricas);
         expListView = (ExpandableListView) findViewById(R.id.exprubrica);
-        ed = (EditText) findViewById(R.id.editText);
+        // ed = (EditText) findViewById(R.id.editText);
         crearRubricas();
+        expListView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
 
         RubricList = Rubrica.listAll(Rubrica.class);
         RubricListName.add("Selecciona una rubrica");

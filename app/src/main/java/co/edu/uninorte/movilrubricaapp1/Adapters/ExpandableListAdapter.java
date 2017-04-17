@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -72,19 +71,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         String headerTitle = (String) getGroup(groupPosition);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.categoria_fila, null);
+            convertView = infalInflater.inflate(R.layout.evaluacion_categoria_fila, null);
         }
         TextView lblListHeader = (TextView) convertView.findViewById(R.id.lblListHeader);
-        final EditText ed = (EditText) convertView.findViewById(R.id.editText3);
+        //final EditText ed = (EditText) convertView.findViewById(R.id.editText3);
 
-        ed.setFocusable(false);
-        ed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ed.setFocusable(true);
-
-            }
-        });
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
 

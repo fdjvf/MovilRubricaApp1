@@ -10,7 +10,7 @@ public class PesoElemento extends SugarRecord {
 
 
     PesoCategoria pesoCategoria;
-    float Peso;
+    String Peso;
 
     public PesoElemento(float Peso) {
 
@@ -19,6 +19,14 @@ public class PesoElemento extends SugarRecord {
 
     public PesoElemento() {
 
+    }
+
+    public String getPeso() {
+        return String.valueOf(Peso);
+    }
+
+    public void setPeso(String peso) {
+        Peso = peso;
     }
 
 

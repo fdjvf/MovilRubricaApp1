@@ -22,5 +22,13 @@ public class Evaluacion extends SugarRecord {
 
     }
 
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String nombre) {
+        Nombre = nombre;
+    }
+
 
 }

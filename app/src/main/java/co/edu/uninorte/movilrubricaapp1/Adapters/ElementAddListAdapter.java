@@ -11,7 +11,8 @@ import android.widget.ListView;
 
 import co.edu.uninorte.movilrubricaapp1.Model.Elemento;
 import co.edu.uninorte.movilrubricaapp1.R;
-import co.edu.uninorte.movilrubricaapp1.databinding.CateogoriaElementoFilaBinding;
+import co.edu.uninorte.movilrubricaapp1.databinding.CategoriaElementoFilaBinding;
+
 
 /**
  * Created by fdjvf on 4/17/2017.
@@ -37,8 +38,8 @@ public class ElementAddListAdapter extends ListAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
-        CateogoriaElementoFilaBinding binding;
-        binding = DataBindingUtil.inflate(inflater, R.layout.cateogoria_elemento_fila, parent, false);
+        CategoriaElementoFilaBinding binding;
+        binding = DataBindingUtil.inflate(inflater, R.layout.categoria_elemento_fila, parent, false);
         binding.setElementoinfor((Elemento) list.get(position));
         return binding.getRoot();
     }
