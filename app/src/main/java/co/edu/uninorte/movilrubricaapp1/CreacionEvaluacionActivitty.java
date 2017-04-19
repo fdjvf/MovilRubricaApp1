@@ -1,6 +1,7 @@
 package co.edu.uninorte.movilrubricaapp1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.databinding.Observable;
@@ -33,12 +34,9 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
 
     public List<Rubrica> RubricList;
     public ObservableArrayList<Object> spinnerlist;
-    Spinner spinner;
     ExpandableListAdapter listAdapter;
-    ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
-    EditText ed;
     public static ArrayAdapter<String> dataAdapter;
     EvaluacionCreacionActivityBinding evaluacionCreacionActivityBinding;
 
@@ -48,23 +46,10 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
         setContentView(R.layout.evaluacion_creacion_activity);
         evaluacionCreacionActivityBinding = DataBindingUtil.setContentView(this,R.layout.evaluacion_creacion_activity);
 
-        ArrayList<String> RubricListName = new ArrayList<>();
-        ArrayList<Categoria> cats = new ArrayList<>();
-        spinner = (Spinner) findViewById(R.id.spinnerRubricas);
-        expListView = (ExpandableListView) findViewById(R.id.exprubrica);
-        // ed = (EditText) findViewById(R.id.editText);
-        crearRubricas();
-        expListView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
-
-        RubricList = Rubrica.listAll(Rubrica.class);
-        RubricListName.add("Selecciona una rubrica");
-        RubricListName.addAll(getAllNamesRub(RubricList));
-
-        // ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, RubricListName);
-        dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, RubricListName);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(dataAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        Intent i = getIntent();
+        long idcourse= i.getLongExtra("myCourseId",0);
+        evaluacionCreacionActivityBinding.exprubrica.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+        evaluacionCreacionActivityBinding.spinnerRubricas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position != 0) {
@@ -78,6 +63,10 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
 
             }
         });
+
+        RubricList = Rubrica.listAll(Rubrica.class);
+
+        //TODO:dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
     }
 
@@ -97,7 +86,7 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
             listDataChild.put(listDataHeader.get(i), elemnames);
         }
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-        expListView.setAdapter(listAdapter);
+        evaluacionCreacionActivityBinding.exprubrica.setAdapter(listAdapter);
 
 
     }
@@ -136,7 +125,7 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
 
         return names;
     }
-
+/*
     public void crearRubricas() {
         Rubrica rub = new Rubrica();
         rub.setName("Rubrica1");
@@ -165,14 +154,6 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
 
     }
 
+*/
 
-    private void hideKeyboard(View view) {
-        // View view = this.getCurrentFocus();
-        if (view != null) {
-
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-
-    }
 }
