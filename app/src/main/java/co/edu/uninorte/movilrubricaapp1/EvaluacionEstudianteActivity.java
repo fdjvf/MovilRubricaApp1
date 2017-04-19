@@ -26,6 +26,7 @@ public class EvaluacionEstudianteActivity extends AppCompatActivity implements I
     Evaluacion eval;
     Estudiante est;
     Rubrica rub;
+    long actualCourseId;
 //TODO: Mandar en el intent el curso que escogió para sacar los estudiante y las evaluaciones pertenecientes a él
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class EvaluacionEstudianteActivity extends AppCompatActivity implements I
         binding = DataBindingUtil.setContentView(this, R.layout.evaluacion_estudiante_activity);
 
         Intent intent = getIntent();
-        long actualCourseId=  intent.getLongExtra("myCourseId",0);
+        actualCourseId=  intent.getLongExtra("myCourseId",0);
         Asignatura actualCourse= Asignatura.findById(Asignatura.class,actualCourseId);
        for (int i=0;i<3;i++)
        {
@@ -61,8 +62,9 @@ public class EvaluacionEstudianteActivity extends AppCompatActivity implements I
         if (page == 0) {
 
             Toast.makeText(this, "Evaluacion", Toast.LENGTH_LONG).show();
-          /*  Intent myIntent = new Intent(this, NewCourse.class);
-            startActivity(myIntent);*/
+           Intent myIntent = new Intent(this,CreacionEvaluacionActivitty.class);
+            myIntent.putExtra("myCourseId",actualCourseId);
+            startActivity(myIntent);
 
         } else {
 
