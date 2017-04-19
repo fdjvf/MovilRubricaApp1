@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
 
+            //     ItemFragment.bindList(   myPagerAdapter.Rubricas.getListView(),Rubrica.ObservableListRubrica);
         }
     }
 
