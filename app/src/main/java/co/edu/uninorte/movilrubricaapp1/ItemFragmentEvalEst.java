@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.List;
+
 import co.edu.uninorte.movilrubricaapp1.Adapters.EstudianteListAdapter;
 import co.edu.uninorte.movilrubricaapp1.Adapters.EvaluacionListAdapter;
 import co.edu.uninorte.movilrubricaapp1.Model.Asignatura;
@@ -35,7 +37,7 @@ public class ItemFragmentEvalEst extends ListFragment {
     // TODO: Customize parameters
     private int pagina = 1;
     private OnListElementClick2 mListener;
-    private static final long myCourse = 0;
+    private static long myCourse;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -48,7 +50,7 @@ public class ItemFragmentEvalEst extends ListFragment {
     @SuppressWarnings("unused")
     public static ItemFragmentEvalEst newInstance(int columnCount, long CurrentCourse) {
         ItemFragmentEvalEst fragment = new ItemFragmentEvalEst();
-
+        myCourse=CurrentCourse;
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, columnCount);
         args.putLong("myCourse", CurrentCourse);
@@ -79,9 +81,11 @@ public class ItemFragmentEvalEst extends ListFragment {
 
         FragmentListEvalestBinding bindingFragment = DataBindingUtil.inflate(inflater, R.layout.fragment_list_evalest, container, false);
         Asignatura as = Asignatura.findById(Asignatura.class,myCourse);
+        List<Evaluacion> eval;
+        Boolean est;
         switch (pagina) {
             case 1:
-                as.getEvaluaciones();
+               eval= as.getEvaluaciones();
                 list = as.ObservableEvaluacionesCurso;
                 break;
             case 2:

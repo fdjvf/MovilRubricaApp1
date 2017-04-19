@@ -31,12 +31,10 @@ public class EvaluacionEstudianteActivity extends AppCompatActivity implements I
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.evaluacion_estudiante_activity);
-        Estudiante.deleteAll(Estudiante.class);
-        Evaluacion.deleteAll(Evaluacion.class);
 
         Intent intent = getIntent();
         long actualCourseId=  intent.getLongExtra("myCourseId",0);
-        //Asignatura actualCourse= Asignatura.findById(Asignatura.class,actualCourseId);
+        Asignatura actualCourse= Asignatura.findById(Asignatura.class,actualCourseId);
 
         binding.viewpagerEvalEstudiante.setAdapter(new myPagerAdapterEvalEst(getSupportFragmentManager(),actualCourseId));
     }

@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/studentName"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1">
-
-    <TextView
-        android:id="@+id/student_name_tvx"
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="estudiante"
+            type="co.edu.uninorte.movilrubricaapp1.Model.Estudiante"></variable>
+    </data>
+    <LinearLayout
+        android:id="@+id/studentName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10sp"
-        android:layout_marginLeft="20sp"
-        android:layout_marginTop="10sp"
-        android:text="StudentName"
-        android:textAlignment="viewStart"
-        android:textColor="@color/primary"
-        android:textSize="20sp"
-        android:textStyle="normal|bold" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/cardview_dark_background">
+
+            <TextView
+                android:id="@+id/student_name_tvx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10sp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginTop="10sp"
+                android:text="@{estudiante.name}"
+                android:textColor="@color/primary"
+                android:textSize="20sp" />
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</layout>

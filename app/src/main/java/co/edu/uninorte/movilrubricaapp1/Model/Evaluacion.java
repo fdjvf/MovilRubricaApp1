@@ -1,6 +1,7 @@
 package co.edu.uninorte.movilrubricaapp1.Model;
 
 import android.databinding.Bindable;
+import android.databinding.Observable;
 import android.databinding.ObservableArrayList;
 
 import com.orm.SugarRecord;
@@ -9,7 +10,7 @@ import com.orm.SugarRecord;
  * Created by fdjvf on 4/11/2017.
  */
 
-public class Evaluacion extends SugarRecord {
+public class Evaluacion extends SugarRecord implements Observable{
 
     public static ObservableArrayList<Object> ObservableListEvaluaciones = new ObservableArrayList<>();
     String Nombre;
@@ -21,6 +22,14 @@ public class Evaluacion extends SugarRecord {
     //Siempre antes de guardar estos, ya se debdio haber guardado la rubrica y la asignatura
     public Evaluacion() {
 
+    }
+
+    public Asignatura getAsignatura() {
+        return asignatura;
+    }
+
+    public void setAsignatura(Asignatura asignatura) {
+        this.asignatura = asignatura;
     }
 
     public Evaluacion(String nombre, Asignatura curso) {
@@ -50,4 +59,13 @@ public class Evaluacion extends SugarRecord {
         this.save();
     }
 
+    @Override
+    public void addOnPropertyChangedCallback(OnPropertyChangedCallback onPropertyChangedCallback) {
+
+    }
+
+    @Override
+    public void removeOnPropertyChangedCallback(OnPropertyChangedCallback onPropertyChangedCallback) {
+
+    }
 }

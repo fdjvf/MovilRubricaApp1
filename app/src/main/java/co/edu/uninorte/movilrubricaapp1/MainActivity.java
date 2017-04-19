@@ -7,16 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 import co.edu.uninorte.movilrubricaapp1.Model.Asignatura;
 import co.edu.uninorte.movilrubricaapp1.Model.Estudiante;
 import co.edu.uninorte.movilrubricaapp1.Model.Rubrica;
 import co.edu.uninorte.movilrubricaapp1.databinding.MainActivityBinding;
 
-public class MainActivity extends AppCompatActivity implements ItemFragment.OnListElementClick {
+public class MainActivity extends AppCompatActivity implements ItemFragment.OnListElementClick, Serializable {
 
 
     MainActivityBinding binding;
-
+    Asignatura t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

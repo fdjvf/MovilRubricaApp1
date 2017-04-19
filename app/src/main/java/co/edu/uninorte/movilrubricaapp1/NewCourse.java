@@ -47,7 +47,7 @@ public class NewCourse extends AppCompatActivity {
             t.save();
         }
         newAsignatura.getEstudiante();
-        ObservableArrayList<Estudiante> t = newAsignatura.ObservableEstudiantesCurso;
+        ObservableArrayList<Object> t = newAsignatura.ObservableEstudiantesCurso;
 
         this.finish();
 
