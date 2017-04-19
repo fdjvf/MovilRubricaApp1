@@ -4,14 +4,13 @@ import android.databinding.ObservableArrayList;
 
 import com.orm.SugarRecord;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by fdjvf on 4/11/2017.
  */
 
-public class Elemento extends SugarRecord implements Serializable {
+public class Elemento extends SugarRecord {
 
     public ObservableArrayList<Object> ObservableDescricionNivel;
     String name;
@@ -44,6 +43,7 @@ public class Elemento extends SugarRecord implements Serializable {
     }
 
     public List<InfoNivel> getInfoNivel() {
+        ObservableDescricionNivel = new ObservableArrayList<>();
         List<InfoNivel> infoNivelList = InfoNivel.find(InfoNivel.class, "elemento = ?", String.valueOf(this.getId()));
         ObservableDescricionNivel.addAll(infoNivelList);
         return infoNivelList;

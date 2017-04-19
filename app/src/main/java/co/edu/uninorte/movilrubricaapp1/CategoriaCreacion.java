@@ -29,6 +29,9 @@ public class CategoriaCreacion extends AppCompatActivity {
     Rubrica myrubrica;
     int Nivel = 0;
     boolean IsEditable;
+    boolean isNew;
+    boolean elementedited;
+    int LastClicked = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,21 +40,21 @@ public class CategoriaCreacion extends AppCompatActivity {
         final CategoriaCreacionContentBinding categoriaCreacionContentBinding = categoriaCreacionActivityBinding.categoriaContent;
 
         Intent intent = getIntent();
-        IsEditable = intent.getBooleanExtra("CateEdit", true);
+        IsEditable = intent.getBooleanExtra("Edicion", true);
+        isNew = intent.getBooleanExtra("Nuevo", true);
 
+        if (!isNew) {
+            categoriaCreacionActivityBinding.AgregarElemento.setEnabled(false);
+        }
         if (IsEditable) {
+
             long catid = intent.getLongExtra("CateEdit", 0);
             categoria = Categoria.findById(Categoria.class, catid);
+            categoria.getElementos();
+            ElementList = categoria.ObservableListElements;
+
         } else {
-            categoriaCreacionActivityBinding.AgregarElemento.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //Actividad de creacion de elementos
-                    Intent temp = new Intent(CategoriaCreacion.this, ElementoCreacion.class);
-                    temp.putExtra("Categoria", categoria.getId());
-                    startActivityForResult(temp, 1);
-                }
-            });
+
             long id = intent.getLongExtra("Rubrica", 0);
             myrubrica = Rubrica.findById(Rubrica.class, id);
             Nivel = myrubrica.EscalaMaxima;
@@ -70,13 +73,26 @@ public class CategoriaCreacion extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent my = getIntent();
-                my.putExtra("Edicion", IsEditable);
+                Intent temp = new Intent(CategoriaCreacion.this, ElementoCreacion.class);
+                temp.putExtra("Edicion", true);
+                elementedited = true;
+                LastClicked = position;
                 Elemento elemento = (Elemento) ElementList.get(position);
-                my.putExtra("elementoedit", elemento.getId());
-                startActivityForResult(my, 1);
+                temp.putExtra("elementoedit", elemento.getId());
+                startActivityForResult(temp, 1);
 
 
+            }
+        });
+
+        categoriaCreacionActivityBinding.AgregarElemento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Actividad de creacion de elementos
+                Intent temp = new Intent(CategoriaCreacion.this, ElementoCreacion.class);
+                temp.putExtra("Edicion", false);
+                temp.putExtra("Categoria", categoria.getId());
+                startActivityForResult(temp, 1);
             }
         });
 
@@ -85,14 +101,22 @@ public class CategoriaCreacion extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            long id = data.getLongExtra("NuevoElemento", 0);
-            Elemento newElement = Elemento.findById(Elemento.class, id);
-            ElementList.add(newElement);
+        if (elementedited) {
+            long id = data.getLongExtra("editcElemento", 1);
+            Elemento elemento = Elemento.findById(Elemento.class, id);
+            ElementList.set(LastClicked, elemento);
+            elementedited = false;
+        } else {
+
+            if (resultCode == RESULT_OK) {
+                long id = data.getLongExtra("NuevoElemento", 0);
+                Elemento newElement = Elemento.findById(Elemento.class, id);
+                ElementList.add(newElement);
+            }
+
+
         }
-
         //super.onActivityResult(requestCode, resultCode, data);
-
 
     }
 
@@ -135,25 +159,31 @@ public class CategoriaCreacion extends AppCompatActivity {
         } else {
 
             Intent myIntent = getIntent();
-            if (!categoria.getElementoslista().isEmpty()) {
-                if (categoria.getDescripcion().isEmpty()) {
-                    categoria.setDescripcion("Breve Descripción");
-                }
-                if (categoria.getName().isEmpty()) {
-                    categoria.setName("Categoria " + myrubrica.getCategorias().size());
-                }
-                categoria.rubrica = myrubrica;
-            categoria.save();
-                myIntent.putExtra("NewCategoria", categoria.getId());
-
+            if (IsEditable) {
+                categoria.save();
+                myIntent.putExtra("editcategoria", categoria.getId());
                 setResult(RESULT_OK, myIntent);
             } else {
-                setResult(RESULT_CANCELED, myIntent);
-                categoria.delete();
-            }
-            finish();//Set on activity result
-            //Set Result
+                if (!categoria.getElementoslista().isEmpty()) {
+                    if (categoria.getDescripcion().isEmpty()) {
+                        categoria.setDescripcion("Breve Descripción");
+                    }
+                    if (categoria.getName().isEmpty()) {
+                        categoria.setName("Categoria " + myrubrica.getCategorias().size());
+                    }
+                    categoria.rubrica = myrubrica;
+                    categoria.save();
+                    myIntent.putExtra("NewCategoria", categoria.getId());
 
+                    setResult(RESULT_OK, myIntent);
+                } else {
+                    setResult(RESULT_CANCELED, myIntent);
+                    categoria.delete();
+                }
+
+            }
+
+            finish();
         }
 
         return true;

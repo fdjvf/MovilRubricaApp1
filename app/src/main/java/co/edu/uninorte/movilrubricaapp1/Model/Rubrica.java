@@ -18,7 +18,8 @@ import co.edu.uninorte.movilrubricaapp1.BR;
 public class Rubrica extends SugarRecord implements Observable {
 
     public static ObservableArrayList<Object> ObservableListRubrica = new ObservableArrayList<>();
-    //    final static private boolean t = ObservableListRubrica.addAll(Rubrica.listAll(Rubrica.class));
+    public ObservableArrayList<Object> ObservableListCategorias;
+    //   final static private boolean t = ObservableListRubrica.addAll(Rubrica.listAll(Rubrica.class));
 
     public int EscalaMaxima;
     String name;
@@ -58,7 +59,9 @@ public class Rubrica extends SugarRecord implements Observable {
     }
 
     public List<Categoria> getCategorias() {
+        ObservableListCategorias = new ObservableArrayList<>();
         List<Categoria> temp = Categoria.find(Categoria.class, "rubrica = ?", String.valueOf(this.getId()));
+        ObservableListCategorias.addAll(temp);
         return temp;
     }
     public void Save() {

@@ -11,6 +11,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class MyPagerAdapter extends FragmentPagerAdapter {
 
     private static int NUM_ITEMS = 2;
+    public ItemFragment Cursos;
+    public ItemFragment Rubricas;
 
     public MyPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
@@ -25,11 +27,15 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     // Returns the fragment to display for that page
     @Override
     public Fragment getItem(int position) {
+
         switch (position) {
             case 0: // Fragment # 0 - This will show FirstFragment
-                return ItemFragment.newInstance(1);
+
+                Cursos = ItemFragment.newInstance(1);
+                return Cursos;
             case 1: // Fragment # 0 - This will show FirstFragment different title
-                return ItemFragment.newInstance(2);
+                Rubricas = ItemFragment.newInstance(2);
+                return Rubricas;
             default:
                 return null;
         }

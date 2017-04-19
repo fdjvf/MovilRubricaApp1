@@ -2,7 +2,6 @@ package co.edu.uninorte.movilrubricaapp1.Model;
 
 import com.orm.SugarRecord;
 
-import java.io.Serializable;
 import java.util.List;
 
 import co.edu.uninorte.movilrubricaapp1.Model.Calificaciones.CalCategoria;
@@ -11,7 +10,7 @@ import co.edu.uninorte.movilrubricaapp1.Model.Calificaciones.CalCategoria;
  * Created by fdjvf on 4/16/2017.
  */
 
-public class Calificacion extends SugarRecord implements Serializable {
+public class Calificacion extends SugarRecord {
 
     Evaluacion evaluacion;
     Estudiante estudiante;

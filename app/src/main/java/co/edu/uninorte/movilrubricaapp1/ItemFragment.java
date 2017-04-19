@@ -51,6 +51,10 @@ public class ItemFragment extends ListFragment {
         return fragment;
     }
 
+    public static void UpdateElement(int Page) {
+        //  bindList(L);
+    }
+
     @BindingAdapter("bind:CourseItems")
     public static void bindList(ListView view, ObservableArrayList<Object> list) {
         int pag = (int) view.getTag();

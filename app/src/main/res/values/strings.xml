@@ -6,6 +6,7 @@
     <string name="action_settings">Ingresar Descripcion</string>
     <string name="level">"Nivel "</string>
     <string-array name="spinnerItems">
+        <item>"Seleccionar nivel"</item>
         <item>3</item>
         <item>4</item>
         <item>5</item>

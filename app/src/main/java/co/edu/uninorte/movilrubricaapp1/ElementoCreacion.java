@@ -30,18 +30,20 @@ public class ElementoCreacion extends AppCompatActivity {
     int Nivel = 0;
     boolean isEditable;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ElementoCreacionActivityBinding elementoCreacionActivityBinding = DataBindingUtil.setContentView(this, R.layout.elemento_creacion_activity);
         elementoCreacionContentBinding = elementoCreacionActivityBinding.elementoContent;
 
+
         Intent intent = getIntent();
         isEditable = intent.getBooleanExtra("Edicion", true);
+
         if (isEditable) {
             long idele = intent.getLongExtra("elementoedit", 1);
             elemento = Elemento.findById(Elemento.class, idele);
-
         } else {
             long id = intent.getLongExtra("Categoria", 0);
             Categoria categoria = Categoria.findById(Categoria.class, id);
@@ -113,13 +115,23 @@ public class ElementoCreacion extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent myIntent = getIntent();
+
         if (isEditable) {
             elemento.save();
+            for (int i = 0; i < ElementList.size(); i++) {
+                ((InfoNivel) ElementList.get(i)).setElemento(elemento);
+                ((InfoNivel) ElementList.get(i)).save();
+                //Validaciones de que este vacio
+            }
+
+            myIntent.putExtra("editcElemento", elemento.getId());
+
             setResult(RESULT_OK, myIntent);
         } else {
             if (!elemento.getName().isEmpty()) {
                 elemento.save();
-                for (int i = 1; i <= Nivel; i++) {
+                for (int i = 1; i < Nivel; i++) {
+                    ((InfoNivel) ElementList.get(i - 1)).setElemento(elemento);
                     ((InfoNivel) ElementList.get(i - 1)).save();
                     //Validaciones de que este vacio
                 }
@@ -131,8 +143,6 @@ public class ElementoCreacion extends AppCompatActivity {
                 setResult(RESULT_CANCELED, myIntent);
             }
         }
-
-
         finish();
         return true;
     }

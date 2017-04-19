@@ -28,7 +28,11 @@ public class RubricaCreacion extends AppCompatActivity {
     RubricaDescripcionInputBinding texboxinputBinding;
     RubricaCreacionBinding rubricaCreacionBinding;
     Boolean isEditable;
+    Boolean isNew;
+    boolean catedited;
+    int LastCatClicked = 0;
     RubricaCreacionContentBinding rubricaCreacionContentBinding;
+
     private Boolean doSomething = false;
 
     @Override
@@ -38,13 +42,19 @@ public class RubricaCreacion extends AppCompatActivity {
         rubricaCreacionBinding = DataBindingUtil.setContentView(this, R.layout.rubrica_creacion);
         rubricaCreacionContentBinding = rubricaCreacionBinding.rubricaContent;
         Intent t = getIntent();
+
         rubricaCreacionBinding.AgregarCategoria.setEnabled(false);
         isEditable = t.getBooleanExtra("Edicion", true);
+        isNew = t.getBooleanExtra("Nuevo", true);
         if (isEditable) {
             //Modo edicion activado
-            long id = t.getLongExtra("RubId", 0);
+            long id = t.getLongExtra("rubricaId", 0);
             rubrica = Rubrica.findById(Rubrica.class, id);
             rubricaCreacionContentBinding.LevelsSpinner.setEnabled(false);
+            rubrica.getCategorias();
+            mylist = rubrica.ObservableListCategorias;
+
+            //Todas las categorias de esa rubrica
 
         } else {
             //Modo nueva rubrica activado
@@ -53,7 +63,6 @@ public class RubricaCreacion extends AppCompatActivity {
             rubrica.setDescripcion("");
             rubrica.save();
             //guardado normalito, sin agregarlo a la vaina observable
-
             rubricaCreacionContentBinding.LevelsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -67,7 +76,6 @@ public class RubricaCreacion extends AppCompatActivity {
                         rubricaCreacionBinding.AgregarCategoria.setEnabled(true);
                         Toast.makeText(RubricaCreacion.this, "A partir de ahora, usted no puede modificar la escala de calificación ", Toast.LENGTH_LONG).show();
                     }
-
                 }
 
                 @Override
@@ -81,9 +89,11 @@ public class RubricaCreacion extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
+
                     Intent temp = new Intent(RubricaCreacion.this, CategoriaCreacion.class);
                     temp.putExtra("Rubrica", rubrica.getId());
-
+                    temp.putExtra("Nuevo", isNew);
+                    temp.putExtra("Edicion", false);
                     startActivityForResult(temp, 1);
 
 
@@ -102,10 +112,14 @@ public class RubricaCreacion extends AppCompatActivity {
         rubricaCreacionContentBinding.CategoriasDisponiblesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 Categoria categoria = (Categoria) mylist.get(position);
                 Intent temp = new Intent(RubricaCreacion.this, CategoriaCreacion.class);
-                temp.putExtra("Edicion", isEditable);
+                temp.putExtra("Edicion", true);
+                temp.putExtra("Nuevo", isNew);//AGREGAR O NO MAS CATEGOORIAS
                 temp.putExtra("CateEdit", categoria.getId());
+                catedited = true;
+                LastCatClicked = position;
                 startActivityForResult(temp, 1);
             }
         });
@@ -114,12 +128,21 @@ public class RubricaCreacion extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //Agregado nuevo valor
-        if (resultCode == RESULT_OK) {
-            long id = data.getLongExtra("NewCategoria", 0);
-
+        if (catedited) {
+            long id = data.getLongExtra("editcategoria", 1);
             Categoria categoria = Categoria.findById(Categoria.class, id);
+            mylist.set(LastCatClicked, categoria);
+            catedited = false;
 
-            mylist.add(categoria);
+            //CategoriaAddListAdapter.bindList(rubricaCreacionContentBinding.CategoriasDisponiblesListView,mylist);
+        } else {
+            if (resultCode == RESULT_OK) {
+                long id = data.getLongExtra("NewCategoria", 0);
+
+                Categoria categoria = Categoria.findById(Categoria.class, id);
+
+                mylist.add(categoria);
+            }
         }
 
 
@@ -162,8 +185,8 @@ public class RubricaCreacion extends AppCompatActivity {
             AlertDialog dialog = Alertbuilder.create();
             dialog.show();
         } else {
-            //Oprime la flechita de salir y se guarda la rubrica
-            //    rubrica.EscalaMaxima=rubricaCreacionContentBinding.LevelsSpinner.getdROW
+
+            if (isNew) {
             if (!rubrica.getCategorias().isEmpty()) {
                 if (rubrica.getDescripcion().isEmpty()) {
                     rubrica.setDescripcion("Breve Descripción");
@@ -171,10 +194,18 @@ public class RubricaCreacion extends AppCompatActivity {
                 if (rubrica.getName().isEmpty()) {
                     rubrica.setName("Rubrica " + Rubrica.ObservableListRubrica.size() + 1);
                 }
+
                 rubrica.Save();
             } else {
                 rubrica.delete();
             }
+            } else {
+                if (isEditable) {
+                    rubrica.save();
+                    setResult(RESULT_OK, getIntent());
+                }
+            }
+
             finish();
 
         }

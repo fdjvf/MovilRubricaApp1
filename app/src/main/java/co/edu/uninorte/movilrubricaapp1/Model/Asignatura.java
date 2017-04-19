@@ -7,7 +7,6 @@ import android.databinding.PropertyChangeRegistry;
 
 import com.orm.SugarRecord;
 
-import java.io.Serializable;
 import java.util.List;
 
 import co.edu.uninorte.movilrubricaapp1.BR;
@@ -16,7 +15,7 @@ import co.edu.uninorte.movilrubricaapp1.BR;
  * Created by fdjvf on 4/11/2017.
  */
 
-public class Asignatura extends SugarRecord implements Observable, Serializable {
+public class Asignatura extends SugarRecord implements Observable {
     //Manejo de Binding
 
     public static ObservableArrayList<Object> ObserVableAsignaturas = new ObservableArrayList<>();

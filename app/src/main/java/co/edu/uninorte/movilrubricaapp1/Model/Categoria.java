@@ -52,6 +52,7 @@ public class Categoria extends SugarRecord {
     }
 
     public boolean getElementos() {
+        ObservableListElements = new ObservableArrayList<>();
         List<Elemento> elementos = Elemento.find(Elemento.class, "categoria = ?", String.valueOf(this.getId()));
         return ObservableListElements.addAll(elementos);
 
