@@ -2,6 +2,8 @@ package co.edu.uninorte.movilrubricaapp1;
 
 import android.content.Context;
 import android.databinding.BindingAdapter;
+import android.databinding.DataBindingUtil;
+import android.databinding.Observable;
 import android.databinding.ObservableArrayList;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,9 +22,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import co.edu.uninorte.movilrubricaapp1.Adapters.ExpandableListAdapter;
+import co.edu.uninorte.movilrubricaapp1.Adapters.SpinnerAdapter;
 import co.edu.uninorte.movilrubricaapp1.Model.Categoria;
 import co.edu.uninorte.movilrubricaapp1.Model.Elemento;
 import co.edu.uninorte.movilrubricaapp1.Model.Rubrica;
+import co.edu.uninorte.movilrubricaapp1.databinding.EvaluacionCreacionActivityBinding;
 
 public class CreacionEvaluacionActivitty extends AppCompatActivity {
 
@@ -35,21 +39,14 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
     EditText ed;
+    public static ArrayAdapter<String> dataAdapter;
+    EvaluacionCreacionActivityBinding evaluacionCreacionActivityBinding;
 
-    @BindingAdapter("bind:RubricaSpinner")
-    public static void bindList(Spinner view, ObservableArrayList<Object> list) {
-     /*  CategoriaAddListAdapter adapter = new CategoriaAddListAdapter(list);
-        view.setAdapter(adapter);*/
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.evaluacion_creacion_activity);
-
-        Rubrica.deleteAll(Rubrica.class);
-        Categoria.deleteAll(Categoria.class);
-        Elemento.deleteAll(Elemento.class);
-
+        evaluacionCreacionActivityBinding = DataBindingUtil.setContentView(this,R.layout.evaluacion_creacion_activity);
 
         ArrayList<String> RubricListName = new ArrayList<>();
         ArrayList<Categoria> cats = new ArrayList<>();
@@ -64,7 +61,7 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
         RubricListName.addAll(getAllNamesRub(RubricList));
 
         // ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, RubricListName);
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, RubricListName);
+        dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, RubricListName);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -74,7 +71,6 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
                     Toast.makeText(parent.getContext(), (String) parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
                     inflateExpandable(parent, position);
                 }
-
             }
 
             @Override
@@ -82,7 +78,6 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
 
             }
         });
-
 
     }
 
@@ -106,7 +101,15 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
 
 
     }
-
+    @BindingAdapter("bind:RubricaSpinner")
+    public static void bindList(Spinner view, ObservableArrayList<Object> list){
+        List<Rubrica> listaR= Rubrica.listAll(Rubrica.class);
+        for(int i=0;i<listaR.size();i++){
+            list.add(listaR.get(i).getName());
+        }
+        SpinnerAdapter spinnerAdapter= new SpinnerAdapter(list);
+        view.setAdapter(spinnerAdapter);
+    }
     private ArrayList<String> getAllNamesCat(List<Categoria> cats) {
         ArrayList<String> names = new ArrayList<>();
         for (int i = 0; i < cats.size(); i++) {
@@ -125,7 +128,7 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
         return names;
     }
 
-    private ArrayList<String> getAllNamesRub(List<Rubrica> cats) {
+    public ArrayList<String> getAllNamesRub(List<Rubrica> cats) {
         ArrayList<String> names = new ArrayList<>();
         for (int i = 0; i < cats.size(); i++) {
             names.add(i, cats.get(i).getName());
@@ -135,8 +138,6 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
     }
 
     public void crearRubricas() {
-
-
         Rubrica rub = new Rubrica();
         rub.setName("Rubrica1");
         rub.save();

@@ -12,20 +12,20 @@ import co.edu.uninorte.movilrubricaapp1.Model.Asignatura;
 
 public class myPagerAdapterEvalEst extends FragmentPagerAdapter {
     private static int NUM_ITEMS = 2;
-long courseId;
+    public long course;
 
     public myPagerAdapterEvalEst(FragmentManager fm, long mycourse) {
         super(fm);
-        this.courseId= mycourse;
+        this.course= mycourse;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0: // Fragment # 0 - This will show FirstFragment
-                return ItemFragmentEvalEst.newInstance(1,courseId);
+                return ItemFragmentEvalEst.newInstance(1,course);
             case 1: // Fragment # 0 - This will show FirstFragment different title
-                return ItemFragmentEvalEst.newInstance(2,courseId);
+                    return ItemFragmentEvalEst.newInstance(2,course);
             default:
                 return null;
         }

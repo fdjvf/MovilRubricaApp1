@@ -35,8 +35,22 @@ public class EvaluacionEstudianteActivity extends AppCompatActivity implements I
         Intent intent = getIntent();
         long actualCourseId=  intent.getLongExtra("myCourseId",0);
         Asignatura actualCourse= Asignatura.findById(Asignatura.class,actualCourseId);
+       for (int i=0;i<3;i++)
+       {
+           Evaluacion t=new Evaluacion();
+           Rubrica te=new Rubrica();
+           te.setName("dokodko");
+           te.save();
+           t.setNombre("Evaluacion "+i);
+           t.setRubrica(te);
+           t.setAsignatura(actualCourse);
+           t.save();
+       }
 
-        binding.viewpagerEvalEstudiante.setAdapter(new myPagerAdapterEvalEst(getSupportFragmentManager(),actualCourseId));
+     //   actualCourse.getEstudiante();
+   //    actualCourse.getEvaluaciones();
+
+        binding.viewpagerEvalEstudiante.setAdapter(new myPagerAdapterEvalEst(getSupportFragmentManager(),actualCourse.getId()   ));
     }
 
     //TODO: OnlistFragmentInteraction()
