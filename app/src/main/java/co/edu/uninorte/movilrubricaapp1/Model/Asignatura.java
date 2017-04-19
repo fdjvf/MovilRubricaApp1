@@ -16,7 +16,7 @@ import co.edu.uninorte.movilrubricaapp1.BR;
  * Created by fdjvf on 4/11/2017.
  */
 
-public class Asignatura extends SugarRecord implements Observable {
+public class Asignatura extends SugarRecord implements Observable, Serializable {
     //Manejo de Binding
 
     public static ObservableArrayList<Object> ObserVableAsignaturas = new ObservableArrayList<>();

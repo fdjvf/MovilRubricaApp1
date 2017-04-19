@@ -47,7 +47,6 @@ public class InfoNivel extends SugarRecord implements Observable {
         this.descripcion = descripcion;
         registry.notifyChange(this, BR.elementInfo);
         registry.notifyChange(this, BR.descripcionInfoNivel);
-
     }
 
     @Bindable

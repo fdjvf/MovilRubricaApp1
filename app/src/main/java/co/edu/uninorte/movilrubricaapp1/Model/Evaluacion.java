@@ -1,27 +1,24 @@
 package co.edu.uninorte.movilrubricaapp1.Model;
 
 import android.databinding.Bindable;
-import android.databinding.Observable;
 import android.databinding.ObservableArrayList;
-import android.databinding.PropertyChangeRegistry;
 
 import com.orm.SugarRecord;
-
-import co.edu.uninorte.movilrubricaapp1.BR;
 
 /**
  * Created by fdjvf on 4/11/2017.
  */
 
-public class Evaluacion extends SugarRecord implements Observable {
+public class Evaluacion extends SugarRecord {
 
+    public static ObservableArrayList<Object> ObservableListEvaluaciones = new ObservableArrayList<>();
     String Nombre;
     Asignatura asignatura;
     Rubrica rubrica;
-    public static ObservableArrayList<Object> ObservableListEvaluaciones = new ObservableArrayList<>();
    // private PropertyChangeRegistry registry = new PropertyChangeRegistry();
     //Siempre antes de guardar estos, ya se debió haber guardado la rubrica y la asignatura
 
+    //Siempre antes de guardar estos, ya se debdio haber guardado la rubrica y la asignatura
     public Evaluacion() {
 
     }
@@ -43,11 +40,9 @@ public class Evaluacion extends SugarRecord implements Observable {
     public String getNombre() {
         return Nombre;
     }
-    @Bindable
-    public void setNombre(String nombre) {
-        this.Nombre = nombre;
-        //registry.notifyChange(this, BR.eval);
 
+    public void setNombre(String nombre) {
+        Nombre = nombre;
     }
 
     public void Save() {
@@ -55,14 +50,4 @@ public class Evaluacion extends SugarRecord implements Observable {
         this.save();
     }
 
-
-    @Override
-    public void addOnPropertyChangedCallback(OnPropertyChangedCallback onPropertyChangedCallback) {
-
-    }
-
-    @Override
-    public void removeOnPropertyChangedCallback(OnPropertyChangedCallback onPropertyChangedCallback) {
-
-    }
 }

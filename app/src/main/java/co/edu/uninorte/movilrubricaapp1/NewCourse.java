@@ -16,10 +16,11 @@ public class NewCourse extends AppCompatActivity {
     public ObservableArrayList<Estudiante> CourseStudents = new ObservableArrayList<>();
     public Estudiante FirstStudent = new Estudiante();
     public Asignatura newAsignatura;
+    CursoActivityNuevoCursoBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CursoActivityNuevoCursoBinding binding = DataBindingUtil.setContentView(this, R.layout.curso_activity_nuevo_curso);
+        binding = DataBindingUtil.setContentView(this, R.layout.curso_activity_nuevo_curso);
 
         newAsignatura = new Asignatura();
         binding.setStudentModel(this);
@@ -32,16 +33,22 @@ public class NewCourse extends AppCompatActivity {
     public void NewEntryStudent(View view) {
         //    StudentHints.add(new StudentHint("Estudiante " + StudentHint.Count));//Floatin Button
         Estudiante estudiante = new Estudiante();
+        estudiante.setName(FirstStudent.getName());
+        binding.StudentNametbx.setText("");
+
         CourseStudents.add(estudiante);
     }
 
     public void SaveCourse(View view) {
+
         newAsignatura.Save();
-        CourseStudents.add(FirstStudent);
         for (Estudiante t : CourseStudents) {
             t.setAsignatura(newAsignatura);
             t.save();
         }
+        newAsignatura.getEstudiante();
+        ObservableArrayList<Estudiante> t = newAsignatura.ObservableEstudiantesCurso;
+
         this.finish();
 
 

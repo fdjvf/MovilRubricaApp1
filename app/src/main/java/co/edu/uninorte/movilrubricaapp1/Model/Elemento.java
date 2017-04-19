@@ -4,15 +4,16 @@ import android.databinding.ObservableArrayList;
 
 import com.orm.SugarRecord;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by fdjvf on 4/11/2017.
  */
 
-public class Elemento extends SugarRecord {
+public class Elemento extends SugarRecord implements Serializable {
 
-    public ObservableArrayList<InfoNivel> ObservableDescricionNivel;
+    public ObservableArrayList<Object> ObservableDescricionNivel;
     String name;
     Categoria categoria;
 

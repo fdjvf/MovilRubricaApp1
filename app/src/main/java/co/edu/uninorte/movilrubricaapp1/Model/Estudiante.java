@@ -13,10 +13,10 @@ import co.edu.uninorte.movilrubricaapp1.BR;
 public class Estudiante extends SugarRecord implements Observable {
 
 
+    public static ObservableArrayList<Object> ObservableListEstudiantes = new ObservableArrayList<>();
     String name = "";
     Boolean state;
     Asignatura asignatura;
-    public static ObservableArrayList<Object> ObservableListEstudiantes = new ObservableArrayList<>();
     private PropertyChangeRegistry registry = new PropertyChangeRegistry();
 
     public Estudiante() {

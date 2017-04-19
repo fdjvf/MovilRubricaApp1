@@ -19,7 +19,7 @@ public class Rubrica extends SugarRecord implements Observable {
 
     public static ObservableArrayList<Object> ObservableListRubrica = new ObservableArrayList<>();
     //    final static private boolean t = ObservableListRubrica.addAll(Rubrica.listAll(Rubrica.class));
-    public ObservableArrayList<Categoria> ObservableListRubricaCategorias;
+
     public int EscalaMaxima;
     String name;
     String descripcion;
@@ -58,9 +58,7 @@ public class Rubrica extends SugarRecord implements Observable {
     }
 
     public List<Categoria> getCategorias() {
-        ObservableListRubricaCategorias = new ObservableArrayList<>();
         List<Categoria> temp = Categoria.find(Categoria.class, "rubrica = ?", String.valueOf(this.getId()));
-        ObservableListRubricaCategorias.addAll(temp);
         return temp;
     }
     public void Save() {

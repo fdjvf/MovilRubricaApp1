@@ -14,8 +14,6 @@ public class Categoria extends SugarRecord {
 
     public Rubrica rubrica;
     public ObservableArrayList<Object> ObservableListElements;
-    public boolean Selected = false;
-    public int Level;
     String name;
     String descripcion;
     public Categoria() {
@@ -65,9 +63,4 @@ public class Categoria extends SugarRecord {
 
     }
 
-    public void Save() {
-        Level = rubrica.EscalaMaxima;
-        rubrica.ObservableListRubricaCategorias.add(this);
-        this.save();
-    }
 }
