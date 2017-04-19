@@ -4,7 +4,9 @@ package co.edu.uninorte.movilrubricaapp1.Adapters;
  * Created by fdjvf on 4/17/2017.
  */
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +17,9 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 
+import co.edu.uninorte.movilrubricaapp1.CreacionEvaluacionActivitty;
 import co.edu.uninorte.movilrubricaapp1.R;
+import co.edu.uninorte.movilrubricaapp1.databinding.EvaluacionPesocategoriaInputBinding;
 
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
@@ -23,6 +27,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> _listDataHeader;
     private HashMap<String, List<String>> _listDataChild;
+    EvaluacionPesocategoriaInputBinding textboxinputpesocat;
 
     public ExpandableListAdapter(Context context, List<String> _listDataHeader, HashMap<String, List<String>> _listDataChild) {
         this.context = context;
@@ -66,7 +71,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, final ViewGroup parent) {
 
         String headerTitle = (String) getGroup(groupPosition);
         if (convertView == null) {
@@ -75,7 +80,24 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
         TextView lblListHeader = (TextView) convertView.findViewById(R.id.lblListHeader);
         //final EditText ed = (EditText) convertView.findViewById(R.id.editText3);
+        TextView lblPesoCat = (TextView) convertView.findViewById(R.id.pesoCategoria);
+        lblPesoCat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+               /* final AlertDialog.Builder AlertBuilder = new AlertDialog.Builder(parent.getContext(),R.style.Theme_AppCompat_Dialog_Alert);
+                LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                textboxinputpesocat = DataBindingUtil.inflate(infalInflater, R.layout.rubrica_descripcion_input, null, false);
+                DataBindingUtil.in
+                */
+
+
+
+
+
+
+            }
+        });
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
 
@@ -93,7 +115,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         }
 
-        TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
+        TextView txtListChild = (TextView) convertView.findViewById(R.id.element_tvx);
         txtListChild.setText(childText);
 
         return convertView;

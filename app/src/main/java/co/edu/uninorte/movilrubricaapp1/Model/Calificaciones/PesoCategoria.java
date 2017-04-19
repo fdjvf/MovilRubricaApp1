@@ -14,21 +14,21 @@ public class PesoCategoria extends SugarRecord {
 
     Categoria categoria;
 
-    float Peso;
+    String Peso;
 
     public PesoCategoria() {
 
     }
 
-    public PesoCategoria(float peso) {
+    public PesoCategoria(String peso) {
         this.Peso = peso;
     }
 
-    public float getPeso() {
+    public String getPeso() {
         return Peso;
     }
 
-    public void setPeso(float peso) {
+    public void setPeso(String peso) {
         Peso = peso;
     }
 

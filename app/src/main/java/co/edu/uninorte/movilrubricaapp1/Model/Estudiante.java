@@ -13,7 +13,7 @@ import co.edu.uninorte.movilrubricaapp1.BR;
 public class Estudiante extends SugarRecord implements Observable {
 
 
-    public static ObservableArrayList<Object> ObservableListEstudiantes = new ObservableArrayList<>();
+
     String name = "";
     Boolean state;
     Asignatura asignatura;
@@ -58,10 +58,7 @@ public class Estudiante extends SugarRecord implements Observable {
         this.state = state;
          //registry.notifyChange(this, BR.bar);
     }
-    public void Save() {
-        ObservableListEstudiantes.add(this);
-        this.save();
-    }
+
 
     @Override
     public void addOnPropertyChangedCallback(OnPropertyChangedCallback onPropertyChangedCallback) {
