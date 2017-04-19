@@ -2,23 +2,16 @@ package co.edu.uninorte.movilrubricaapp1;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.Observable;
-import android.databinding.ObservableArrayList;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import co.edu.uninorte.movilrubricaapp1.Model.Asignatura;
 import co.edu.uninorte.movilrubricaapp1.Model.Estudiante;
 import co.edu.uninorte.movilrubricaapp1.Model.Evaluacion;
 import co.edu.uninorte.movilrubricaapp1.Model.Rubrica;
 import co.edu.uninorte.movilrubricaapp1.databinding.EvaluacionEstudianteActivityBinding;
-import co.edu.uninorte.movilrubricaapp1.databinding.RubricaDescripcionInputBinding;
 
 public class EvaluacionEstudianteActivity extends AppCompatActivity implements ItemFragmentEvalEst.OnListElementClick2 {
 //TODO: EVERYTHING
@@ -36,17 +29,6 @@ public class EvaluacionEstudianteActivity extends AppCompatActivity implements I
         Intent intent = getIntent();
         actualCourseId=  intent.getLongExtra("myCourseId",0);
         Asignatura actualCourse= Asignatura.findById(Asignatura.class,actualCourseId);
-       for (int i=0;i<3;i++)
-       {
-           Evaluacion t=new Evaluacion();
-           Rubrica te=new Rubrica();
-           te.setName("dokodko");
-           te.save();
-           t.setNombre("Evaluacion "+i);
-           t.setRubrica(te);
-           t.setAsignatura(actualCourse);
-           t.save();
-       }
 
      //   actualCourse.getEstudiante();
    //    actualCourse.getEvaluaciones();

@@ -1,33 +1,27 @@
 package co.edu.uninorte.movilrubricaapp1;
 
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
-import android.databinding.Observable;
 import android.databinding.ObservableArrayList;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ExpandableListView;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import co.edu.uninorte.movilrubricaapp1.Adapters.ExpandableListAdapter;
-import co.edu.uninorte.movilrubricaapp1.Adapters.SpinnerAdapter;
 import co.edu.uninorte.movilrubricaapp1.Model.Categoria;
 import co.edu.uninorte.movilrubricaapp1.Model.Elemento;
 import co.edu.uninorte.movilrubricaapp1.Model.Rubrica;
 import co.edu.uninorte.movilrubricaapp1.databinding.EvaluacionCreacionActivityBinding;
+import co.edu.uninorte.movilrubricaapp1.databinding.EvaluacionPesocategoriaInputBinding;
 
 public class CreacionEvaluacionActivitty extends AppCompatActivity {
 
@@ -35,38 +29,86 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
     public List<Rubrica> RubricList;
     public ObservableArrayList<Object> spinnerlist;
     ExpandableListAdapter listAdapter;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
-    public static ArrayAdapter<String> dataAdapter;
+    EvaluacionPesocategoriaInputBinding texboxinputBinding;
     EvaluacionCreacionActivityBinding evaluacionCreacionActivityBinding;
 
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
+    TextView lblPesoCat;
+    Rubrica rubrica;
+    Categoria cat;
     @Override
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.evaluacion_creacion_activity);
         evaluacionCreacionActivityBinding = DataBindingUtil.setContentView(this,R.layout.evaluacion_creacion_activity);
+
+        spinnerlist = new ObservableArrayList<>();
+        RubricList = Rubrica.listAll(Rubrica.class);
+        List<String> rubricas = getAllNamesRub(RubricList);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rubricas);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        evaluacionCreacionActivityBinding.spinnerRubricas.setAdapter(adapter);
+        evaluacionCreacionActivityBinding.exprubrica.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+
 
         Intent i = getIntent();
         long idcourse= i.getLongExtra("myCourseId",0);
-        evaluacionCreacionActivityBinding.exprubrica.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+
         evaluacionCreacionActivityBinding.spinnerRubricas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position != 0) {
-                    Toast.makeText(parent.getContext(), (String) parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
                     inflateExpandable(parent, position);
+
+
+                    lblPesoCat = (TextView) findViewById(R.id.pesoCategoria);
+                    lblPesoCat.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+
+                            final android.support.v7.app.AlertDialog.Builder Alertbuilder = new android.support.v7.app.AlertDialog.Builder(
+                                    CreacionEvaluacionActivitty.this, R.style.Theme_AppCompat_Dialog_Alert);
+                            texboxinputBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.evaluacion_pesocategoria_input, null, false);
+
+                            //texboxinputBinding.setPesoCategoria();
+                            Alertbuilder.setTitle("Ingresar descripcion");
+                            Alertbuilder.setCancelable(false);
+                            Alertbuilder.setView(texboxinputBinding.getRoot());
+                            Alertbuilder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            });
+
+                            Alertbuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    rubrica.setDescripcion("");
+
+                                }
+                            });
+                            android.support.v7.app.AlertDialog dialog = Alertbuilder.create();
+                            dialog.show();
+
+
+//textview actualizar
+
+
+                        }
+                    });
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
-
-        RubricList = Rubrica.listAll(Rubrica.class);
-
-        //TODO:dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        evaluacionCreacionActivityBinding.setCreacionEvaluacionmodel(this);
 
     }
 
@@ -74,7 +116,9 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
         String nameRubrica = parent.getItemAtPosition(position).toString();
         listDataChild = new HashMap<String, List<String>>();
         List<Rubrica> RubricaSelected;
+
         RubricaSelected = Rubrica.find(Rubrica.class, "name = ?", nameRubrica);
+        rubrica = RubricaSelected.get(0);
         List<Categoria> categ = RubricaSelected.get(0).getCategorias();
         List<Elemento> elems;
         ArrayList<String> elemnames;
@@ -90,15 +134,7 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
 
 
     }
-    @BindingAdapter("bind:RubricaSpinner")
-    public static void bindList(Spinner view, ObservableArrayList<Object> list){
-        List<Rubrica> listaR= Rubrica.listAll(Rubrica.class);
-        for(int i=0;i<listaR.size();i++){
-            list.add(listaR.get(i).getName());
-        }
-        SpinnerAdapter spinnerAdapter= new SpinnerAdapter(list);
-        view.setAdapter(spinnerAdapter);
-    }
+
     private ArrayList<String> getAllNamesCat(List<Categoria> cats) {
         ArrayList<String> names = new ArrayList<>();
         for (int i = 0; i < cats.size(); i++) {
@@ -125,35 +161,5 @@ public class CreacionEvaluacionActivitty extends AppCompatActivity {
 
         return names;
     }
-/*
-    public void crearRubricas() {
-        Rubrica rub = new Rubrica();
-        rub.setName("Rubrica1");
-        rub.save();
-
-        Categoria cat = new Categoria();
-        cat.rubrica = rub;
-        cat.setName("Categoria1");
-        cat.save();
-        Categoria cat2 = new Categoria();
-        cat2.rubrica = rub;
-        cat2.setName("Categoria2");
-        cat2.save();
-
-        for (int i = 1; i < 5; i++) {
-            Elemento elem = new Elemento();
-            elem.setName("Elemento" + i);
-            elem.setCategoria(cat);
-            elem.save();
-            Elemento elem2 = new Elemento();
-            elem2.setName("Elemento" + i);
-            elem2.setCategoria(cat2);
-            elem2.save();
-        }
-
-
-    }
-
-*/
 
 }
