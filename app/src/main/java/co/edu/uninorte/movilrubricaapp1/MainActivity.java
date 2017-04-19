@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 import co.edu.uninorte.movilrubricaapp1.Model.Asignatura;
 import co.edu.uninorte.movilrubricaapp1.Model.Estudiante;
 import co.edu.uninorte.movilrubricaapp1.Model.Rubrica;
 import co.edu.uninorte.movilrubricaapp1.databinding.MainActivityBinding;
 
-public class MainActivity extends AppCompatActivity implements ItemFragment.OnListElementClick {
+public class MainActivity extends AppCompatActivity implements ItemFragment.OnListElementClick, Serializable {
 
 
     MainActivityBinding binding;
@@ -40,8 +42,6 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
 
         //  binding.CoursesList.setSelection(0);//Permite que la lista comience en una posicion espeficia
-
-
 }
     public void StartNewCreationActivity(View view) {
 
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
         if (page == 0) {
 
-          /*  Intent myIntent = new Intent(this, NewCourse.class);
+          /* Intent myIntent = new Intent(this, NewCourse.class);
             startActivity(myIntent);*/
 
         } else {
@@ -65,8 +65,11 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     public void onListFragmentInteraction(int position) {
         int page = binding.viewpager.getCurrentItem();
         if (page == 0) {
-            Toast.makeText(this, "Curso" + position, Toast.LENGTH_LONG).show();
-            //Comenzar activdad para el curso
+            Intent myIntent = new Intent(this, EvaluacionEstudianteActivity.class);
+            Asignatura selectedCourse= (Asignatura) Asignatura.ObserVableAsignaturas.get(position);
+            long selectedCourseId= selectedCourse.getId();
+            myIntent.putExtra("myCourseId", selectedCourseId);
+            startActivity(myIntent);
         } else {
             Toast.makeText(this, "Rubrica" + position, Toast.LENGTH_LONG).show();
             //Comenzar actividad para la rubrica

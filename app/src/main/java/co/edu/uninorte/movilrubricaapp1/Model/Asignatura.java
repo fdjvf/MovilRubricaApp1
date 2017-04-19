@@ -7,6 +7,7 @@ import android.databinding.PropertyChangeRegistry;
 
 import com.orm.SugarRecord;
 
+import java.io.Serializable;
 import java.util.List;
 
 import co.edu.uninorte.movilrubricaapp1.BR;
@@ -21,8 +22,8 @@ public class Asignatura extends SugarRecord implements Observable {
     public static ObservableArrayList<Object> ObserVableAsignaturas = new ObservableArrayList<>();
 //    final static private boolean l = ObserVableAsignaturas.addAll(Asignatura.listAll(Asignatura.class));
 
-    public ObservableArrayList<Estudiante> ObservableEstudiantesCurso = new ObservableArrayList<>();
-    public ObservableArrayList<Evaluacion> ObservableEvaluacionesCurso = new ObservableArrayList<>();
+    public ObservableArrayList<Object> ObservableEstudiantesCurso = new ObservableArrayList<>();
+    public ObservableArrayList<Object> ObservableEvaluacionesCurso = new ObservableArrayList<>();
 
     String name = "";
     String description = "";

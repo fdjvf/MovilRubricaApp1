@@ -27,7 +27,6 @@ public class Rubrica extends SugarRecord implements Observable {
 
     public Rubrica() {
     }
-
     public Rubrica(String name, int niveles, String descripcion) {
         this.name = name;
         this.EscalaMaxima = niveles;
@@ -43,6 +42,7 @@ public class Rubrica extends SugarRecord implements Observable {
     public void setName(String name) {
         this.name = name;
         registry.notifyChange(this, BR.rubricamodel);
+
     }
 
     @Bindable
