@@ -9,7 +9,7 @@ import com.orm.SugarRecord;
 public class PesoElemento extends SugarRecord {
 
 
-    PesoCategoria pesoCategoria;
+  public PesoCategoria pesoCategoria;
     String Peso;
 
     public PesoElemento(float Peso) {

@@ -1,55 +1,61 @@
 package co.edu.uninorte.movilrubricaapp1.Adapters;
 
-/**
- * Created by fdjvf on 4/17/2017.
- */
-
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import co.edu.uninorte.expandablelistviewtest.databinding.ElementoPorcentajeFilaBinding;
+import co.edu.uninorte.expandablelistviewtest.databinding.EvaluacionCategoriaFilaBinding;
+import co.edu.uninorte.expandablelistviewtest.databinding.EvaluacionPesoCategoriaInputBinding;
+import co.edu.uninorte.movilrubricaapp1.CategoriaPesoCategoria;
+import co.edu.uninorte.movilrubricaapp1.ElementoPesoElemento;
 import co.edu.uninorte.movilrubricaapp1.R;
-import co.edu.uninorte.movilrubricaapp1.databinding.EvaluacionPesocategoriaInputBinding;
 
+/**
+ * Created by fdjvf on 4/19/2017.
+ */
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
-    EvaluacionPesocategoriaInputBinding textboxinputpesocat;
-    private Context context;
-    private List<String> _listDataHeader;
-    private HashMap<String, List<String>> _listDataChild;
+    public List<CategoriaPesoCategoria> pesoCategorias;
+    Context context;
+    HashMap<Integer, ArrayList<ElementoPesoElemento>> pesoElementos;
 
-    public ExpandableListAdapter(Context context, List<String> _listDataHeader, HashMap<String, List<String>> _listDataChild) {
+    public ExpandableListAdapter(Context context, List<CategoriaPesoCategoria> pesoCategorias, HashMap<Integer, ArrayList<ElementoPesoElemento>> hash) {
         this.context = context;
-        this._listDataHeader = _listDataHeader;
-        this._listDataChild = _listDataChild;
+        this.pesoCategorias = pesoCategorias;
+        this.pesoElementos = hash;
+
     }
 
     @Override
     public int getGroupCount() {
-        return this._listDataHeader.size();
+        return pesoCategorias.size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition)).size();
+        return pesoElementos.get(groupPosition).size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return this._listDataHeader.get(groupPosition);
+        return pesoCategorias.get(groupPosition);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition)).get(childPosition);
+        return pesoElementos.get(groupPosition).get(childPosition);
     }
 
     @Override
@@ -59,7 +65,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
+        return 0;
     }
 
     @Override
@@ -68,39 +74,78 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, final ViewGroup parent) {
+    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
-        String headerTitle = (String) getGroup(groupPosition);
-        if (convertView == null) {
-            LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.evaluacion_categoria_fila, null);
-        }
-        TextView lblListHeader = (TextView) convertView.findViewById(R.id.lblListHeader);
-        lblListHeader.setTypeface(null, Typeface.BOLD);
-        lblListHeader.setText(headerTitle);
+        final CategoriaPesoCategoria pcp = pesoCategorias.get(groupPosition);
+        EvaluacionCategoriaFilaBinding evaluacionCategoriaFilaBinding;
 
 
-        return convertView;
+        final LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        evaluacionCategoriaFilaBinding = DataBindingUtil.inflate(infalInflater, R.layout.evaluacion_categoria_fila, parent, false);
+
+
+        evaluacionCategoriaFilaBinding.setNombreCategoria(pcp.categoria);
+        evaluacionCategoriaFilaBinding.setCategoriapesoModel(pcp.pesoCategoria);
+
+
+        evaluacionCategoriaFilaBinding.lblListHeader.setTypeface(null, Typeface.BOLD);
+
+        evaluacionCategoriaFilaBinding.pesoCategoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder Alertbuilder = new AlertDialog.Builder(
+                        context, R.style.Theme_AppCompat_Dialog_Alert);
+                EvaluacionPesoCategoriaInputBinding texboxinputBinding;
+
+                texboxinputBinding = DataBindingUtil.inflate(infalInflater, R.layout.evaluacion_peso_categoria_input, null, false);
+                texboxinputBinding.setPesoCategoria(pcp.pesoCategoria);
+                Alertbuilder.setTitle("Ingresar");
+                Alertbuilder.setCancelable(false);
+                Alertbuilder.setView(texboxinputBinding.getRoot());
+                Alertbuilder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+                Alertbuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                    }
+                });
+                AlertDialog dialog = Alertbuilder.create();
+                dialog.show();
+
+
+            }
+        });
+
+
+        return evaluacionCategoriaFilaBinding.getRoot();
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final String childText = (String) getChild(groupPosition, childPosition);
 
-        if (convertView == null) {
+        List<ElementoPesoElemento> epe = pesoElementos.get(groupPosition);
+        ElementoPorcentajeFilaBinding elementoPorcentajeFilaBinding;
+
             LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.elemento_porcentaje_fila, null);
 
-        }
+        elementoPorcentajeFilaBinding = DataBindingUtil.inflate(infalInflater, R.layout.elemento_porcentaje_fila, parent, false);
 
-        TextView txtListChild = (TextView) convertView.findViewById(R.id.element_tvx);
-        txtListChild.setText(childText);
+        elementoPorcentajeFilaBinding.setNombrElemento(epe.get(childPosition).elemento);
+        elementoPorcentajeFilaBinding.setPesoElementoModel(epe.get(childPosition).pesoElemento);
 
-        return convertView;
+
+        return elementoPorcentajeFilaBinding.getRoot();
     }
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return true;
+        return false;
     }
 }

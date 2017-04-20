@@ -13,8 +13,8 @@ import java.util.List;
 public class Elemento extends SugarRecord {
 
     public ObservableArrayList<Object> ObservableDescricionNivel;
+    public Categoria categoria;
     String name;
-    Categoria categoria;
 
     public Elemento() {
 

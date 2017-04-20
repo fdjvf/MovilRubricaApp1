@@ -44,7 +44,7 @@ public class EvaluacionEstudianteActivity extends AppCompatActivity implements I
         if (page == 0) {
 
             Toast.makeText(this, "Evaluacion", Toast.LENGTH_LONG).show();
-           Intent myIntent = new Intent(this,CreacionEvaluacionActivitty.class);
+            Intent myIntent = new Intent(this, EvaluacionCreacionActivity.class);
             myIntent.putExtra("myCourseId",actualCourseId);
             startActivity(myIntent);
 

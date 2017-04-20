@@ -7,6 +7,7 @@ import android.databinding.PropertyChangeRegistry;
 
 import com.orm.SugarRecord;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.uninorte.movilrubricaapp1.BR;
@@ -32,6 +33,15 @@ public class Rubrica extends SugarRecord implements Observable {
         this.name = name;
         this.EscalaMaxima = niveles;
         this.descripcion = descripcion;
+    }
+
+    public static List<String> getListNames() {
+        List<Rubrica> r = Rubrica.listAll(Rubrica.class);
+        ArrayList<String> names = new ArrayList<>();
+        for (int i = 0; i < r.size(); i++) {
+            names.add(r.get(i).getName());
+        }
+        return names;
     }
 
     @Bindable
@@ -64,6 +74,7 @@ public class Rubrica extends SugarRecord implements Observable {
         ObservableListCategorias.addAll(temp);
         return temp;
     }
+
     public void Save() {
         ObservableListRubrica.add(this);
         this.save();

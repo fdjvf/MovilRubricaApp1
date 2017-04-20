@@ -12,7 +12,7 @@ import co.edu.uninorte.movilrubricaapp1.Model.Categoria;
 
 public class PesoCategoria extends SugarRecord {
 
-    Categoria categoria;
+    public Categoria categoria;
 
     String Peso;
 

@@ -3,7 +3,6 @@
     package="co.edu.uninorte.movilrubricaapp1">
 
     <application
-        android:name="com.orm.SugarApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -43,11 +42,6 @@
         <activity
             android:name=".ElementoCreacion"
             android:label="Crear Elemento" />
-        <activity
-            android:name=".CreacionEvaluacionActivitty"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
         <activity
             android:name=".EvaluacionEstudianteActivity"
             android:windowSoftInputMode="adjustPan">
