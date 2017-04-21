@@ -10,13 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".NewCourse" />
 
@@ -42,11 +40,11 @@
         <activity
             android:name=".ElementoCreacion"
             android:label="Crear Elemento" />
+        <activity android:name=".EvaluacionEstudianteActivity" />
         <activity
-            android:name=".EvaluacionEstudianteActivity"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
+            android:name=".EvaluacionCreacionActivity"
+            android:label="Crear Evaluacion" />
+        <activity android:name=".EstudiantesCalificacionActivity"></activity>
     </application>
 
 </manifest>

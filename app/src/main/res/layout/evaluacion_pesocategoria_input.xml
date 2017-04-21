@@ -22,7 +22,8 @@
             android:layout_width="291dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textMultiLine"
+
+            android:inputType="number|numberDecimal"
             android:text="@={pesoCategoria.peso}" />
 
     </LinearLayout>

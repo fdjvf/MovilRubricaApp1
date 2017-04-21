@@ -7,10 +7,6 @@
             name="nombreEval"
             type="co.edu.uninorte.movilrubricaapp1.Model.Evaluacion"></variable>
 
-        <variable
-            name="CreacionEvaluacionmodel"
-            type="co.edu.uninorte.movilrubricaapp1.MainActivity"></variable>
-
     </data>
 
     <LinearLayout
@@ -41,6 +37,7 @@
                 android:paddingTop="20dp"
                 android:text="Creación Evaluacion"
                 android:textAlignment="center"
+                android:textColor="@color/primary"
                 android:textSize="20sp" />
 
             <EditText
@@ -63,6 +60,7 @@
                 android:paddingTop="20dp"
                 android:text="Escoja una rúbrica a aplicar"
                 android:textAlignment="center"
+                android:textColor="@color/primary"
                 android:textSize="20sp" />
 
             <Spinner
@@ -75,7 +73,8 @@
                 android:id="@+id/exprubrica"
                 android:layout_width="match_parent"
                 android:layout_height="263dp"
-                android:layout_weight="0.02" />
+                android:layout_weight="0.02"
+                android:descendantFocusability="afterDescendants" />
 
         </LinearLayout>
 

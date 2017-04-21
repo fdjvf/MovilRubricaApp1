@@ -6,9 +6,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.orm.SugarContext;
+
 import java.io.Serializable;
 
 import co.edu.uninorte.movilrubricaapp1.Model.Asignatura;
+import co.edu.uninorte.movilrubricaapp1.Model.Calificacion;
+import co.edu.uninorte.movilrubricaapp1.Model.Calificaciones.CalCategoria;
+import co.edu.uninorte.movilrubricaapp1.Model.Calificaciones.CalElemento;
+import co.edu.uninorte.movilrubricaapp1.Model.Calificaciones.PesoCategoria;
+import co.edu.uninorte.movilrubricaapp1.Model.Calificaciones.PesoElemento;
 import co.edu.uninorte.movilrubricaapp1.Model.Categoria;
 import co.edu.uninorte.movilrubricaapp1.Model.Elemento;
 import co.edu.uninorte.movilrubricaapp1.Model.Estudiante;
@@ -24,18 +31,64 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     boolean EditingRubrica;
     MyPagerAdapter myPagerAdapter;
     boolean EditingCurso;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+    public static void fill() {
         Asignatura.deleteAll(Asignatura.class);
         Rubrica.deleteAll(Rubrica.class);
         Estudiante.deleteAll(Estudiante.class);
         Categoria.deleteAll(Categoria.class);
         Elemento.deleteAll(Elemento.class);
         InfoNivel.deleteAll(InfoNivel.class);
+        PesoCategoria.deleteAll(PesoCategoria.class);
+        PesoElemento.deleteAll(PesoElemento.class);
+        CalElemento.deleteAll(CalElemento.class);
+        CalCategoria.deleteAll(CalCategoria.class);
+        Calificacion.deleteAll(Calificacion.class);
+        for (int i = 1; i < 11; i++) {
+            Rubrica r = new Rubrica();
+            r.setName("Rubrica " + i);
+            r.Save();
 
+            for (int j = 1; j < 3; j++) {
+                Categoria cat = new Categoria();
+                cat.setName("Categoria " + j);
+                cat.rubrica = r;
+                cat.save();
+
+                for (int k = 1; k < 3; k++) {
+                    Elemento el = new Elemento();
+                    el.setName("Elemento " + k);
+                    el.categoria = cat;
+                    el.save();
+                }
+            }
+        }
+        for (int i = 1; i < 10; i++) {
+            Asignatura temp = new Asignatura();
+            temp.setDescription("Brevee Descripcion");
+            temp.setName("Curso " + i);
+            temp.Save();
+
+            for (int j = 1; j < 5; j++) {
+                Estudiante estudiante = new Estudiante();
+                estudiante.setName("Estudiante " + j);
+                estudiante.setAsignatura(temp);
+                estudiante.setState(false);
+                estudiante.save();
+            }
+        }
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+        SugarContext.init(this);
         myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
+        fill();
         //Cuando se crea el elemento ya queda registradoo, puede modificarlo y luego guardarlo de nuevoo
         binding.viewpager.setAdapter(myPagerAdapter);
 
@@ -92,10 +145,9 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
             myIntent.putExtra("Nuevo", false);
             myIntent.putExtra("rubricaId", idRubrica);
             startActivityForResult(myIntent, 1);
-
-
             //Comenzar actividad para la rubrica
         }
 
     }
+
 }

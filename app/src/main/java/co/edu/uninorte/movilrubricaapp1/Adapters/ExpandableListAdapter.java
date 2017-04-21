@@ -1,10 +1,10 @@
 package co.edu.uninorte.movilrubricaapp1.Adapters;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import co.edu.uninorte.expandablelistviewtest.databinding.ElementoPorcentajeFilaBinding;
-import co.edu.uninorte.expandablelistviewtest.databinding.EvaluacionCategoriaFilaBinding;
-import co.edu.uninorte.expandablelistviewtest.databinding.EvaluacionPesoCategoriaInputBinding;
 import co.edu.uninorte.movilrubricaapp1.CategoriaPesoCategoria;
 import co.edu.uninorte.movilrubricaapp1.ElementoPesoElemento;
 import co.edu.uninorte.movilrubricaapp1.R;
+import co.edu.uninorte.movilrubricaapp1.databinding.ElementoPorcentajeFilaBinding;
+import co.edu.uninorte.movilrubricaapp1.databinding.EvaluacionCategoriaFilaBinding;
+import co.edu.uninorte.movilrubricaapp1.databinding.EvaluacionPesocategoriaInputBinding;
 
 /**
  * Created by fdjvf on 4/19/2017.
@@ -96,11 +96,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
                 final AlertDialog.Builder Alertbuilder = new AlertDialog.Builder(
                         context, R.style.Theme_AppCompat_Dialog_Alert);
-                EvaluacionPesoCategoriaInputBinding texboxinputBinding;
+                EvaluacionPesocategoriaInputBinding texboxinputBinding;
 
-                texboxinputBinding = DataBindingUtil.inflate(infalInflater, R.layout.evaluacion_peso_categoria_input, null, false);
+                texboxinputBinding = DataBindingUtil.inflate(infalInflater, R.layout.evaluacion_pesocategoria_input, null, false);
                 texboxinputBinding.setPesoCategoria(pcp.pesoCategoria);
-                Alertbuilder.setTitle("Ingresar");
+                Alertbuilder.setTitle("Ingresar peso de categoria");
                 Alertbuilder.setCancelable(false);
                 Alertbuilder.setView(texboxinputBinding.getRoot());
                 Alertbuilder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {

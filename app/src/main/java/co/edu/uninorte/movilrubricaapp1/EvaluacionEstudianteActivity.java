@@ -15,10 +15,11 @@ import co.edu.uninorte.movilrubricaapp1.databinding.EvaluacionEstudianteActivity
 
 public class EvaluacionEstudianteActivity extends AppCompatActivity implements ItemFragmentEvalEst.OnListElementClick2 {
 //TODO: EVERYTHING
-  EvaluacionEstudianteActivityBinding binding;
+EvaluacionEstudianteActivityBinding binding;
     Evaluacion eval;
     Estudiante est;
     Rubrica rub;
+    Asignatura actualCourse;
     long actualCourseId;
 //TODO: Mandar en el intent el curso que escogió para sacar los estudiante y las evaluaciones pertenecientes a él
     @Override
@@ -28,16 +29,14 @@ public class EvaluacionEstudianteActivity extends AppCompatActivity implements I
 
         Intent intent = getIntent();
         actualCourseId=  intent.getLongExtra("myCourseId",0);
-        Asignatura actualCourse= Asignatura.findById(Asignatura.class,actualCourseId);
+        actualCourse = Asignatura.findById(Asignatura.class, actualCourseId);
 
-     //   actualCourse.getEstudiante();
-   //    actualCourse.getEvaluaciones();
 
-        binding.viewpagerEvalEstudiante.setAdapter(new myPagerAdapterEvalEst(getSupportFragmentManager(),actualCourse.getId()   ));
+        binding.viewpagerEvalEstudiante.setAdapter(new myPagerAdapterEvalEst(getSupportFragmentManager(), actualCourseId));
     }
 
     //TODO: OnlistFragmentInteraction()
-    public void StartNewCreationActivity(View view) {
+    public void StartNewCreationActivity1(View view) {
 
         int page = binding.viewpagerEvalEstudiante.getCurrentItem();
 
@@ -46,7 +45,8 @@ public class EvaluacionEstudianteActivity extends AppCompatActivity implements I
             Toast.makeText(this, "Evaluacion", Toast.LENGTH_LONG).show();
             Intent myIntent = new Intent(this, EvaluacionCreacionActivity.class);
             myIntent.putExtra("myCourseId",actualCourseId);
-            startActivity(myIntent);
+            startActivityForResult(myIntent, 1);
+
 
         } else {
 
@@ -57,11 +57,22 @@ public class EvaluacionEstudianteActivity extends AppCompatActivity implements I
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+
+            binding.viewpagerEvalEstudiante.setAdapter(new myPagerAdapterEvalEst(getSupportFragmentManager(), actualCourseId));
+        }
+
+
+    }
+
+    @Override
     public void onListFragmentInteraction(int position) {
         int page = binding.viewpagerEvalEstudiante.getCurrentItem();
         if (page == 0) {
-            Toast.makeText(this, "Evaluacion" + position, Toast.LENGTH_LONG).show();
-            //Comenzar activdad para el curso
+            Intent myIntent = new Intent(this, EstudiantesCalificacionActivity.class);
+            myIntent.putExtra("myCourseId", actualCourseId);
+
         } else {
             Toast.makeText(this, "Estudiante" + position, Toast.LENGTH_LONG).show();
             //Comenzar actividad para la rubrica

@@ -1,26 +1,20 @@
 package co.edu.uninorte.movilrubricaapp1;
 
-import android.support.v4.app.ListFragment;
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.databinding.BindingAdapter;
-
+import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import java.util.List;
-
 import co.edu.uninorte.movilrubricaapp1.Adapters.EstudianteListAdapter;
 import co.edu.uninorte.movilrubricaapp1.Adapters.EvaluacionListAdapter;
 import co.edu.uninorte.movilrubricaapp1.Model.Asignatura;
-import co.edu.uninorte.movilrubricaapp1.Model.Estudiante;
-import co.edu.uninorte.movilrubricaapp1.Model.Evaluacion;
 import co.edu.uninorte.movilrubricaapp1.databinding.FragmentListEvalestBinding;
-import co.edu.uninorte.movilrubricaapp1.databinding.FragmentListMainBinding;
 
 
 
@@ -33,12 +27,12 @@ public class ItemFragmentEvalEst extends ListFragment {
     // TODO: Customize parameter argument names
     private static final String ARG_PAGE = "pagina";
     private static final String ARG_COURSEID = "myCourse";
+    private static long myCourse;
     public ObservableArrayList<Object> list;
     //private static final String ARG_LISTA = "vector";
     // TODO: Customize parameters
     private int pagina = 1;
     private OnListElementClick2 mListener;
-    private static long myCourse;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -70,11 +64,11 @@ public class ItemFragmentEvalEst extends ListFragment {
         switch (pag) {
             case 1:
                 as.getEvaluaciones();
-               view.setAdapter(new EvaluacionListAdapter(as.ObservableEvaluacionesCurso));
+                view.setAdapter(new EvaluacionListAdapter(Asignatura.ObservableEvaluacionesCurso));
                 break;
             case 2:
                 as.getEstudiante();
-                view.setAdapter(new EstudianteListAdapter(as.ObservableEstudiantesCurso));
+                view.setAdapter(new EstudianteListAdapter(Asignatura.ObservableEstudiantesCurso));
                 break;
 
         }
@@ -92,11 +86,11 @@ public class ItemFragmentEvalEst extends ListFragment {
         switch (pagina) {
             case 1:
                as.getEvaluaciones();
-                list = as.ObservableEvaluacionesCurso;
+                list = Asignatura.ObservableEvaluacionesCurso;
                 break;
             case 2:
              as.getEstudiante();
-                list = as.ObservableEstudiantesCurso;
+                list = Asignatura.ObservableEstudiantesCurso;
                 break;
         }
 
