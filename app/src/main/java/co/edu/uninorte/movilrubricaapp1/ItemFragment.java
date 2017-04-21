@@ -50,19 +50,16 @@ public class ItemFragment extends ListFragment {
         fragment.setArguments(args);
         return fragment;
     }
-
-    public static void UpdateElement(int Page) {
-        //  bindList(L);
-    }
-
     @BindingAdapter("bind:CourseItems")
     public static void bindList(ListView view, ObservableArrayList<Object> list) {
         int pag = (int) view.getTag();
         switch (pag) {
             case 1:
+                //        Asignatura.GetAll();
                 view.setAdapter(new CourseListAdapter(Asignatura.ObserVableAsignaturas));
                 break;
             case 2:
+                //         Rubrica.GetAll();
                 view.setAdapter(new RubricaListAdapter(Rubrica.ObservableListRubrica));
                 break;
 
@@ -77,9 +74,11 @@ public class ItemFragment extends ListFragment {
 
         switch (pagina) {
             case 1:
+                Asignatura.GetAll();
                 list = Asignatura.ObserVableAsignaturas;
                 break;
             case 2:
+                Rubrica.GetAll();
                 list = Rubrica.ObservableListRubrica;
                 break;
         }

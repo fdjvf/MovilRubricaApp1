@@ -17,9 +17,7 @@ public class EstudiantesCalificacionActivity extends AppCompatActivity {
 
     @BindingAdapter("bind:EstudianteItems")
     public static void bindList(ListView view, ObservableArrayList<Object> list) {
-
         view.setAdapter(new EstudianteListAdapter(Asignatura.ObservableEstudiantesCurso));
-
     }
 
     @Override

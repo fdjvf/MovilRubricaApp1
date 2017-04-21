@@ -28,11 +28,16 @@ public class Asignatura extends SugarRecord implements Observable {
     private PropertyChangeRegistry registry = new PropertyChangeRegistry();
 
     public Asignatura() {
-    }
 
+    }
     public Asignatura(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public static void GetAll() {
+        ObserVableAsignaturas = new ObservableArrayList<>();
+        ObserVableAsignaturas.addAll(Asignatura.listAll(Asignatura.class));
     }
 
     @Bindable

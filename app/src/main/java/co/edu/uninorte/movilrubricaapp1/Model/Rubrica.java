@@ -44,6 +44,11 @@ public class Rubrica extends SugarRecord implements Observable {
         return names;
     }
 
+    public static void GetAll() {
+        ObservableListRubrica = new ObservableArrayList<>();
+        ObservableListRubrica.addAll(Rubrica.listAll(Rubrica.class));
+    }
+
     @Bindable
     public String getName() {
         return name;

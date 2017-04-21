@@ -73,6 +73,8 @@ EvaluacionEstudianteActivityBinding binding;
             Intent myIntent = new Intent(this, EstudiantesCalificacionActivity.class);
             myIntent.putExtra("myCourseId", actualCourseId);
 
+            startActivity(myIntent);
+
         } else {
             Toast.makeText(this, "Estudiante" + position, Toast.LENGTH_LONG).show();
             //Comenzar actividad para la rubrica
