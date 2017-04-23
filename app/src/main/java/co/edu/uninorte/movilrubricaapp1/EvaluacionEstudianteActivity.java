@@ -8,17 +8,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import co.edu.uninorte.movilrubricaapp1.Model.Asignatura;
-import co.edu.uninorte.movilrubricaapp1.Model.Estudiante;
-import co.edu.uninorte.movilrubricaapp1.Model.Evaluacion;
-import co.edu.uninorte.movilrubricaapp1.Model.Rubrica;
 import co.edu.uninorte.movilrubricaapp1.databinding.EvaluacionEstudianteActivityBinding;
 
 public class EvaluacionEstudianteActivity extends AppCompatActivity implements ItemFragmentEvalEst.OnListElementClick2 {
 //TODO: EVERYTHING
-EvaluacionEstudianteActivityBinding binding;
-    Evaluacion eval;
-    Estudiante est;
-    Rubrica rub;
+
+    EvaluacionEstudianteActivityBinding binding;
     Asignatura actualCourse;
     long actualCourseId;
 //TODO: Mandar en el intent el curso que escogió para sacar los estudiante y las evaluaciones pertenecientes a él
@@ -42,7 +37,7 @@ EvaluacionEstudianteActivityBinding binding;
 
         if (page == 0) {
 
-            Toast.makeText(this, "Evaluacion", Toast.LENGTH_LONG).show();
+
             Intent myIntent = new Intent(this, EvaluacionCreacionActivity.class);
             myIntent.putExtra("myCourseId",actualCourseId);
             startActivityForResult(myIntent, 1);
@@ -60,6 +55,7 @@ EvaluacionEstudianteActivityBinding binding;
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
 
+
             binding.viewpagerEvalEstudiante.setAdapter(new myPagerAdapterEvalEst(getSupportFragmentManager(), actualCourseId));
         }
 
@@ -71,8 +67,8 @@ EvaluacionEstudianteActivityBinding binding;
         int page = binding.viewpagerEvalEstudiante.getCurrentItem();
         if (page == 0) {
             Intent myIntent = new Intent(this, EstudiantesCalificacionActivity.class);
-            myIntent.putExtra("myCourseId", actualCourseId);
 
+            myIntent.putExtra("myCourseId", actualCourseId);
             startActivity(myIntent);
 
         } else {

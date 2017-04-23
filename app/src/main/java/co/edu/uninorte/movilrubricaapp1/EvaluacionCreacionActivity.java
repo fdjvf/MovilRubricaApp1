@@ -102,6 +102,7 @@ public class EvaluacionCreacionActivity extends AppCompatActivity {
                     ExpandableListAdapter expandableListAdapter = new ExpandableListAdapter(EvaluacionCreacionActivity.this, categoriaPesoCategorias, miHash);
                     binding.exprubrica.setAdapter(expandableListAdapter);
                     binding.spinnerRubricas.setEnabled(false);
+                    binding.nombreEvalEt.setFocusable(true);
                     //TODO: desactivar el spinner cuando cargue la rubrica
                 }
 
@@ -115,7 +116,7 @@ public class EvaluacionCreacionActivity extends AppCompatActivity {
 
         binding.setNombreEval(evaluacion);
         evaluacion.setAsignatura(asignatura);
-
+        binding.nombreEvalEt.setFocusable(false);
         Toolbar toolbar = binding.toolbar3;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

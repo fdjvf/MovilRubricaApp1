@@ -26,9 +26,20 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme" />
 
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calificar Evaluación"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:textSize="26sp" />
+
         <ListView
+            android:id="@+id/mylistview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
             bind:EstudianteItems="@{nombreEst.ObservableEstudiantesCurso}" />
 
 
